@@ -23,9 +23,9 @@ The direct acceleration structure is basically a dummy object that gives data di
  * memory O(m)
 
 #### Quadtree
-The quadtree class inserts the particles into tree structure to speed up some of the common methods.
+The quadtree class inserts the particles into tree structure to speed up some of the common methods on average.
 
- * get\_at\_area O(log n + m)
+ * get\_at\_area O(n log n + m)
  * get\_at\_point O(log n + m)
  * add/remove/move\_object O(log n)
  * memory O(n log n + m)
