@@ -11,7 +11,7 @@ My plan is to have separate interfaces for the models(the data) and the accelera
 The data structure that I will definately use is quadtree and the algorithms needed for it. I may or may not implement linked list and hash table for the project.
 
 ### The acceleration structures
-I have used two variables n and m in the big O notatiotion. The n represents the area of the world and the variable n represents the number of particles.
+I have used two variables n and m in the big O notatiotion. The n represents the area of the world and the variable m represents the number of particles.
 
 ####Direct
 The direct acceleration structure is basically a dummy object that gives data directly from the model.
