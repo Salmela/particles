@@ -19,7 +19,7 @@ The direct acceleration structure is basically a dummy object that gives data di
  * get\_at\_area O(m)
  * get\_at\_point O(m)
  * add/remove\_object O(1)
- * move\_object(1)
+ * move\_object O(1)
  * memory O(m)
 
 #### Quadtree
