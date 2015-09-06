@@ -20,7 +20,7 @@ The direct acceleration structure is basically a dummy object that gives data di
  * get\_at\_point O(m)
  * add/remove\_object O(1)
  * move\_object O(1)
- * memory O(m)
+ * memory usage O(m)
 
 #### Quadtree
 The quadtree class inserts the particles into tree structure to speed up some of the common methods on average.
@@ -28,7 +28,7 @@ The quadtree class inserts the particles into tree structure to speed up some of
  * get\_at\_area O(n log n + m)
  * get\_at\_point O(log n + m)
  * add/remove/move\_object O(log n)
- * memory O(n log n + m)
+ * memory usage O(n log n + m)
 
 #### Array
 The array class inserts the particles into nearest array cell's linked list.
@@ -36,4 +36,4 @@ The array class inserts the particles into nearest array cell's linked list.
  * get\_at\_area O(n + m)
  * get\_at\_point O(m)
  * add/remove/move\_object O(1)
- * memory O(n)
+ * memory usage O(n)
