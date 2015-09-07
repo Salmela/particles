@@ -6,6 +6,10 @@ package org.tiralab.particles;
  */
 public class App {
 	public static void main( String[] args) {
+		Window window;
+
 		System.out.println( "Starting...");
+		window = new Window();
+		window.setVisible(true);
 	}
 }
