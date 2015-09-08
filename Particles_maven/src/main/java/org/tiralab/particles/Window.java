@@ -70,7 +70,8 @@ public class Window extends Frame {
 		contentHeight = this.getHeight() -
 		                windowFrame.top - windowFrame.left;
 		text = listener.getHeaderText();
-		particles = listener.fetchParticles(0, 0, w, h);
+		particles = listener.fetchParticles(0, 0,
+			contentWidth, contentHeight);
 
 		for(i = 0; i < particles.length; i++) {
 			Particle p = particles[i];
