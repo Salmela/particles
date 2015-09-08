@@ -4,6 +4,7 @@ import java.awt.event.WindowEvent;
 import java.awt.Frame;
 import java.awt.Insets;
 import java.awt.Graphics;
+import java.awt.FontMetrics;
 import java.awt.AWTEvent;
 
 public class Window extends Frame {
@@ -32,11 +33,13 @@ public class Window extends Frame {
 	public void paint(Graphics g) {
 		Particle[] particles;
 		int i, w, h;
+		String text;
 		Insets windowFrame;
 
 		windowFrame = getInsets();
 		w = this.getWidth() - windowFrame.left - windowFrame.right;
 		h = this.getHeight() - windowFrame.top - windowFrame.left;
+		text = listener.getHeaderText();
 		particles = listener.fetchParticles(0, 0, w, h);
 
 		for(i = 0; i < particles.length; i++) {
@@ -45,5 +48,11 @@ public class Window extends Frame {
 			           windowFrame.top + (int)p.getY() - 1,
 			           2, 2);
 		}
+
+		FontMetrics metrics = g.getFontMetrics();
+
+		g.drawString(text,
+		             windowFrame.left + w - metrics.stringWidth(text) - 8,
+		             windowFrame.top + metrics.getHeight());
 	}
 }
