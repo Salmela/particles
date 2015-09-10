@@ -22,6 +22,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 	private GuiListener listener;
 	private Image offscreenBuffer;
 	private Graphics offscreenGraphics;
+	private boolean paused;
 
 	/* These are for detecting size changes */
 	private int oldWidth, oldHeight;
@@ -45,8 +46,9 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 		this.addMouseListener(this);
 		this.listener = listener;
 		this.zoom = 1.0f;
+		this.paused = false;
 
-		pointerDrag = false;
+		this.pointerDrag = false;
 	}
 
 	protected void processWindowEvent(WindowEvent event) {
@@ -54,8 +56,14 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 			case WindowEvent.WINDOW_CLOSING:
 				this.dispose();
 				break;
+			case WindowEvent.WINDOW_ACTIVATED:
+				this.paused = false;
+				this.repaint();
+				break;
+			case WindowEvent.WINDOW_DEACTIVATED:
+				this.paused = true;
+				break;
 			default:
-				System.out.println(event);
 				break;
 		}
 	}
@@ -192,7 +200,9 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 
 		graphics.drawImage(this.offscreenBuffer, 0, 0, this);
 
-		this.repaint();
+		if(!this.paused) {
+			this.repaint();
+		}
 	}
 
 	public float getScrollX() {
