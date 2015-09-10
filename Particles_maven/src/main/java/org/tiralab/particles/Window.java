@@ -193,4 +193,12 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 
 		this.repaint();
 	}
+
+	public float getScrollX() {
+		return this.x;
+	}
+
+	public float getScrollY() {
+		return this.y;
+	}
 }

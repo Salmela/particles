@@ -5,16 +5,15 @@ package org.tiralab.particles;
  *
  */
 public class App implements GuiListener {
-	Model active_model;
+	private Model activeModel;
+	private Window window;
 
 	public App() {
-		Window window;
+		this.window = new Window(this);
+		this.window.setVisible(true);
 
-		window = new Window(this);
-		window.setVisible(true);
-
-		//this.active_model = new Stars();
-		this.active_model = new Fluid();
+		this.activeModel = new Stars();
+		//this.activeModel = new Fluid();
 	}
 
 	public static void main(String[] args) {
@@ -22,11 +21,14 @@ public class App implements GuiListener {
 	}
 
 	public String getHeaderText() {
-		return "Test";
+		return String.format("[%s] %d, %d",
+			this.activeModel.getClass().getSimpleName(),
+			(int)this.window.getScrollX(),
+			(int)this.window.getScrollY());
 	}
 
 	public Particle[] fetchParticles(int x, int y, int w, int h) {
-		active_model.simulate();
-		return active_model.getParticles();
+		activeModel.simulate();
+		return activeModel.getParticles();
 	}
 }
