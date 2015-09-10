@@ -164,15 +164,16 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 			//this.kineticMoveY *= 0.99f;
 		}
 
-		x_offset = -x * this.zoom + windowFrame.left +
+		x_offset = -this.x * this.zoom + windowFrame.left +
 		           contentWidth / 2;
-		y_offset = -y * this.zoom + windowFrame.top +
+		y_offset = -this.y * this.zoom + windowFrame.top +
 		           contentHeight / 2;
 
 		g = this.offscreenGraphics;
 		g.clearRect(0, 0, getWidth(), getHeight());
 
-		particles = listener.fetchParticles((int)x, (int)y,
+		/*TODO: replace this.x with x_offset */
+		particles = listener.fetchParticles((int)this.x, (int)this.y,
 			contentWidth, contentHeight);
 
 		for(i = 0; i < particles.length; i++) {
