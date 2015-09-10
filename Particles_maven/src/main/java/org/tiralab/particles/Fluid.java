@@ -22,6 +22,11 @@ public class Fluid implements Model {
 		return p;
 	}
 
+	/**
+	 * Returns value of nice polynome at x. This
+	 * is used in computing the force created by
+	 * other particle.
+	 */
 	private float force_polynome(float x) {
 		return (-4 * x * x) + (12 * x) - 8;
 	}

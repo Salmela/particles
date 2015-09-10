@@ -51,6 +51,9 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 		this.pointerDrag = false;
 	}
 
+	/**
+	 * Handle the window close event and activate/deactivate events.
+	 */
 	protected void processWindowEvent(WindowEvent event) {
 		switch(event.getID()) {
 			case WindowEvent.WINDOW_CLOSING:
@@ -68,6 +71,9 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 		}
 	}
 
+	/**
+	 * Mouse dragging event handler.
+	 */
 	public void mouseDragged(MouseEvent e) {
 		if(!this.pointerDrag) {
 			this.dragStartX = this.x;
@@ -93,6 +99,9 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 		}
 	}
 
+	/**
+	 * Unneeded event handlers.
+	 */
 	public void mouseMoved(MouseEvent e) {
 	}
 	public void mouseClicked(MouseEvent e) {
@@ -101,6 +110,10 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 	}
 	public void mouseExited(MouseEvent e) {
 	}
+
+	/**
+	 * Mouse pressed event handler.
+	 */
 	public void mousePressed(MouseEvent e) {
 		switch(e.getButton()) {
 		    case MouseEvent.BUTTON1:
@@ -117,6 +130,10 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 			break;
 		}
 	}
+
+	/**
+	 * Mouse released event handler.
+	 */
 	public void mouseReleased(MouseEvent e) {
 		if(this.mouseEvent == MOUSE_ADD) {
 			System.out.println("add particles");
@@ -125,7 +142,9 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 		this.mouseEvent = MOUSE_NONE;
 	}
 
-
+	/**
+	 * Resize event handler.
+	 */
 	private void resized() {
 		this.offscreenBuffer = createImage(getWidth(), getHeight());
 		this.offscreenGraphics = offscreenBuffer.getGraphics();
@@ -134,10 +153,16 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 		this.oldHeight = getHeight();
 	}
 
+	/**
+	 * Handles the screen update.
+	 */
 	public void update(Graphics g){
 		paint(g);
 	}
 
+	/**
+	 * Renders the content of the window.
+	 */
 	public void paint(Graphics graphics) {
 		Graphics g;
 		Particle[] particles;
@@ -205,10 +230,16 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 		}
 	}
 
+	/**
+	 * Gets the x coordinate of the view.
+	 */
 	public float getScrollX() {
 		return this.x;
 	}
 
+	/**
+	 * Gets the y coordinate of the view.
+	 */
 	public float getScrollY() {
 		return this.y;
 	}

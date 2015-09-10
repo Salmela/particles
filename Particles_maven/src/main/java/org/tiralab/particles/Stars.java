@@ -2,7 +2,9 @@ package org.tiralab.particles;
 
 import java.util.Random;
 
-/* nbody simulation */
+/**
+ *  Nbody simulator.
+ */
 public class Stars implements Model {
 	private Particle p[];
 

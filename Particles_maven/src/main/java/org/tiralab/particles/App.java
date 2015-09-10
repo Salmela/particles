@@ -20,6 +20,10 @@ public class App implements GuiListener {
 		new App();
 	}
 
+	/**
+	 * Returns the string visible in the
+	 * top-right corner of the window.
+	 */
 	public String getHeaderText() {
 		return String.format("[%s] %d, %d",
 			this.activeModel.getClass().getSimpleName(),
@@ -27,8 +31,15 @@ public class App implements GuiListener {
 			(int)this.window.getScrollY());
 	}
 
+	/**
+	 * Gets list of particles that are currently visible in the
+	 * screen.
+	 */
 	public Particle[] fetchParticles(int x, int y, int w, int h) {
+		/*TODO: move this to separate thread */
 		activeModel.simulate();
+
+		/*TODO: use acceleration structure here */
 		return activeModel.getParticles();
 	}
 }
