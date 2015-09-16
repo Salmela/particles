@@ -4,14 +4,20 @@ import java.awt.event.WindowEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.Frame;
 import java.awt.Insets;
 import java.awt.Graphics;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.FontMetrics;
 import java.awt.AWTEvent;
 
-public class Window extends Frame implements MouseMotionListener, MouseListener {
+/**
+ * Window class renders the whole gui.
+ */
+public class Window extends Frame implements MouseMotionListener, MouseListener, KeyListener {
 	static final long serialVersionUID = 0x1424234725l;
 
 	final int MOUSE_NONE = 0;
@@ -44,6 +50,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 		this.enableEvents(AWTEvent.WINDOW_EVENT_MASK);
 		this.addMouseMotionListener(this);
 		this.addMouseListener(this);
+		this.addKeyListener(this);
 		this.listener = listener;
 		this.zoom = 1.0f;
 		this.paused = false;
@@ -109,6 +116,14 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 	public void mouseEntered(MouseEvent e) {
 	}
 	public void mouseExited(MouseEvent e) {
+	}
+	public void keyTyped(KeyEvent e) {
+	}
+	public void keyPressed(KeyEvent e) {
+	}
+
+	public void keyReleased(KeyEvent e) {
+		listener.keyPress(KeyEvent.getKeyText(e.getKeyCode()));
 	}
 
 	/**
@@ -197,13 +212,19 @@ public class Window extends Frame implements MouseMotionListener, MouseListener 
 			//this.kineticMoveY *= 0.99f;
 		}
 
+		g = this.offscreenGraphics;
 		x_offset = -this.x * this.zoom + windowFrame.left +
 		           contentWidth / 2;
 		y_offset = -this.y * this.zoom + windowFrame.top +
 		           contentHeight / 2;
 
-		g = this.offscreenGraphics;
-		g.clearRect(0, 0, getWidth(), getHeight());
+		/* Draw the whole screen with semi-transparent white.
+		 * This will create motion blur effect.
+		 */
+		g.setColor(new Color(1f, 1f, 1f, 0.3f));
+		g.fillRect(0, 0, getWidth(), getHeight());
+		/* restore the color of the paint */
+		g.setColor(new Color(0f, 0f, 0f, 1f));
 
 		/*TODO: replace this.x with x_offset */
 		particles = listener.fetchParticles((int)this.x, (int)this.y,

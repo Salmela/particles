@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Fluid implements Model {
 	private Particle p[];
+	private Storage storage;
 
 	public Fluid() {
 		int i;
@@ -16,6 +17,10 @@ public class Fluid implements Model {
 				rand.nextInt() % 64,
 				rand.nextInt() % 64);
 		}
+	}
+
+	public void setStorage(Storage storage) {
+		this.storage = storage;
 	}
 
 	public Particle[] getParticles() {
