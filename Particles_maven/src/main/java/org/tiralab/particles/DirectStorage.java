@@ -1,5 +1,9 @@
 package org.tiralab.particles;
 
+/**
+ * This is dummy acceleration structure that just gets the particles
+ * from the model and puts them into a array.
+ */
 public class DirectStorage implements Storage {
 	private Particle[] array;
 	private Model model;

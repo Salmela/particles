@@ -106,28 +106,52 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		}
 	}
 
-	/**
+	/*
 	 * Unneeded event handlers.
+	 */
+
+	/** Unused event handler.
+	 * @param e The mouse event.
 	 */
 	public void mouseMoved(MouseEvent e) {
 	}
+	/** Unused event handler.
+	 * @param e The mouse event.
+	 */
 	public void mouseClicked(MouseEvent e) {
 	}
+	/** Unused event handler.
+	 * @param e The mouse event.
+	 */
 	public void mouseEntered(MouseEvent e) {
 	}
+	/** Unused event handler.
+	 * @param e The mouse event.
+	 */
 	public void mouseExited(MouseEvent e) {
 	}
+	/** Unused event handler.
+	 * @param e The mouse event.
+	 */
 	public void keyTyped(KeyEvent e) {
 	}
+	/** Unused event handler.
+	 * @param e The key event.
+	 */
 	public void keyPressed(KeyEvent e) {
 	}
 
+	/**
+	 * Event handler for key released.
+	 * @param e The key event.
+	 */
 	public void keyReleased(KeyEvent e) {
 		listener.keyPress(KeyEvent.getKeyText(e.getKeyCode()));
 	}
 
 	/**
 	 * Mouse pressed event handler.
+	 * @param e The mouse event.
 	 */
 	public void mousePressed(MouseEvent e) {
 		switch(e.getButton()) {
@@ -148,6 +172,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 
 	/**
 	 * Mouse released event handler.
+	 * @param e The mouse event.
 	 */
 	public void mouseReleased(MouseEvent e) {
 		if(this.mouseEvent == MOUSE_ADD) {
@@ -253,6 +278,8 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 
 	/**
 	 * Gets the x coordinate of the view.
+	 *
+	 * @return Gives the x coordinate of the view.
 	 */
 	public float getScrollX() {
 		return this.x;
@@ -260,6 +287,8 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 
 	/**
 	 * Gets the y coordinate of the view.
+	 *
+	 * @return Gives the y coordinate of the view.
 	 */
 	public float getScrollY() {
 		return this.y;

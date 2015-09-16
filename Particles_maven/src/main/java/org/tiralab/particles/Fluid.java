@@ -2,6 +2,9 @@ package org.tiralab.particles;
 
 import java.util.Random;
 
+/**
+ * This class is model for simple fluid simulation.
+ */
 public class Fluid implements Model {
 	private Particle p[];
 	private Storage storage;

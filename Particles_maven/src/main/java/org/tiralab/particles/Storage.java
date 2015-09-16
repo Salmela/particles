@@ -6,11 +6,21 @@ package org.tiralab.particles;
 public interface Storage {
 	/**
 	 * Get all particles that are intersecting the rectangle(x,y,w,h).
+	 *
+	 * @param x The x coordinate of the rectangle
+	 * @param y The y coordinate of the rectangle
+	 * @param w The width of the rectangle
+	 * @param h The height of the rectangle
+	 * @return Gives particles that are inside the rectangle.
 	 */
 	Particle[] getObjectsAtArea(float x, float y, float w, float h);
 
 	/**
 	 * Get nearest particle that is to point (x, y).
+	 *
+	 * @param x The x coordinate of the point
+	 * @param y The y coordinate of the point
+	 * @return Gives the nearest particle.
 	 */
 	Particle getObjectAtPoint(float x, float y);
 
@@ -18,6 +28,7 @@ public interface Storage {
 	 * Set model of storage.
 	 *
 	 * The model is needed for getting all particles.
+	 * @param model The new model for the storage.
 	 */
 	void setModel(Model model);
 
