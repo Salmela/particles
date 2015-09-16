@@ -1,6 +1,7 @@
 package org.tiralab.particles;
 
-import junit.framework.Assert;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Unit test for particle class.
@@ -8,41 +9,41 @@ import junit.framework.Assert;
 public class ParticleTest {
 	@Test
 	public void constructorPositionX() {
-		Particle p = new Particle(3.1, 5);
-		Assert.assertEqual(p.getX(), 3.1);
+		Particle p = new Particle(3.1f, 5f);
+		Assert.assertEquals(3.1f, p.getX(), .01f);
 	}
 
 	@Test
 	public void constructorPositionY() {
-		Particle p = new Particle(5, 9.2);
-		Assert.assertEqual(p.getY(), 9.2);
+		Particle p = new Particle(5f, 9.2f);
+		Assert.assertEquals(9.2f, p.getY(), .01f);
 	}
 
 	@Test
 	public void setPositionX() {
-		Particle p = new Particle(3.1, 7.8);
-		p.set(6.9, 1.2);
-		Assert.assertEqual(p.getX(), 6.9);
+		Particle p = new Particle(3.1f, 7.8f);
+		p.set(6.9f, 1.2f);
+		Assert.assertEquals(6.9f, p.getX(), .01f);
 	}
 
 	@Test
 	public void setPositionY() {
-		Particle p = new Particle(3.1, 7.8);
-		p.set(6.9, 1.2);
-		Assert.assertEqual(p.getY(), 1.2);
+		Particle p = new Particle(3.1f, 7.8f);
+		p.set(6.9f, 1.2f);
+		Assert.assertEquals(1.2f, p.getY(), .01f);
 	}
 
 	@Test
 	public void setVelocityX() {
-		Particle p = new Particle(3.1, 7.8);
-		p.setVelocity(8.4, 2.3);
-		Assert.assertEqual(p.getVelocityX(), 8.4);
+		Particle p = new Particle(3.1f, 7.8f);
+		p.setVelocity(8.4f, 2.3f);
+		Assert.assertEquals(8.4f, p.getVelocityX(), .01f);
 	}
 
 	@Test
 	public void setVelocityY() {
-		Particle p = new Particle(3.1, 7.8);
-		p.setVelocity(8.4, 2.3);
-		Assert.assertEqual(p.getVelocityY(), 2.3);
+		Particle p = new Particle(3.1f, 7.8f);
+		p.setVelocity(8.4f, 2.3f);
+		Assert.assertEquals(2.3f, p.getVelocityY(), .01f);
 	}
 }

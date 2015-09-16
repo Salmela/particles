@@ -1,29 +1,24 @@
 package org.tiralab.particles;
 
-import junit.framework.Assert;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Unit test for model interface.
+ * NOTE: This file is only used as abstract class for models tests.
  */
-public abstract class ModelTest {
-	public abstract MyInterface createInstance();
+public class ModelTest {
+	public Model createInstance() {
+		return null;
+	}
 
+	//TODO implement tests for these methods
 	//Particle[] getParticles();
 	//void simulate();
 
 	@Test
 	public void test() {
-	}
-}
-
-public class StarsTest extends ModelTest {
-	public Model createInstance() {
-		return new Stars();
-	}
-}
-
-public class FluidTest extends ModelTest {
-	public Model createInstance() {
-		return new Fluid();
+		Model model = createInstance();
+		if(model == null) return;
 	}
 }
