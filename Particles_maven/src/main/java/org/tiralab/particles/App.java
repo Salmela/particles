@@ -6,14 +6,18 @@ package org.tiralab.particles;
  */
 public class App implements GuiListener {
 	private Model activeModel;
+	private Storage activeStorage;
 	private Window window;
 
 	public App() {
 		this.window = new Window(this);
 		this.window.setVisible(true);
 
+		this.activeStorage = new DirectStorage();
 		this.activeModel = new Stars();
 		//this.activeModel = new Fluid();
+
+		this.activeStorage.setModel(this.activeModel);
 	}
 
 	public static void main(String[] args) {
@@ -54,7 +58,6 @@ public class App implements GuiListener {
 		/*TODO: move this to separate thread */
 		activeModel.simulate();
 
-		/*TODO: use acceleration structure here */
-		return activeModel.getParticles();
+		return this.activeStorage.getObjectsAtArea(x, y, w, h);
 	}
 }
