@@ -13,7 +13,10 @@ import java.awt.Image;
 import java.awt.FontMetrics;
 import java.awt.AWTEvent;
 
-public class Window extends Frame implements MouseMotionListener, MouseListener {
+/**
+ * Window class renders the whole gui.
+ */
+public class Window extends Frame implements MouseMotionListener, MouseListener, KeyListener {
 	static final long serialVersionUID = 0x1424234725l;
 
 	final int MOUSE_NONE = 0;
