@@ -20,6 +20,21 @@ public class App implements GuiListener {
 		new App();
 	}
 
+	public void keyPress(String key) {
+		char k = key.toCharArray()[0];
+		switch(k) {
+			/*TODO switch model*/
+			case 'M':
+				break;
+			/*TODO reset the model */
+			case 'R':
+				break;
+			/*TODO switch acceleration structure */
+			case 'A':
+				break;
+		}
+	}
+
 	/**
 	 * Returns the string visible in the
 	 * top-right corner of the window.
