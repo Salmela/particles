@@ -1,9 +1,10 @@
 package org.tiralab.particles;
 
 public interface Storage {
-	Particle[] get_objects_at_area(float x, float y, float w, float h);
-	Particle[] get_object_at_point(float x, float y);
-	void add_particle(Particle particle);
-	void remove_particle(Particle particle);
-	void move_particle(Particle particle);
+	Particle[] getObjectsAtArea(float x, float y, float w, float h);
+	Particle getObjectAtPoint(float x, float y);
+	void setModel(Model model);
+	void addParticle(Particle particle);
+	void removeParticle(Particle particle);
+	void moveParticle(Particle particle);
 }
