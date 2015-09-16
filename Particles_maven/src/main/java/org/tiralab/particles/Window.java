@@ -30,6 +30,9 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 	private Graphics offscreenGraphics;
 	private boolean paused;
 
+	private long prevFrameTime;
+	private long prevInputTime;
+
 	/* These are for detecting size changes */
 	private int oldWidth, oldHeight;
 	private float zoom;
@@ -56,6 +59,8 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		this.paused = false;
 
 		this.pointerDrag = false;
+		this.prevFrameTime = System.currentTimeMillis();
+		this.prevInputTime = this.prevFrameTime;
 	}
 
 	/**
@@ -79,6 +84,66 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 	}
 
 	/**
+	 * Update the kinetic variables when mouse moves.
+	 *
+	 * @param e The mouse event.
+	 */
+	private void mouseInputUpdate(MouseEvent e) {
+		float kx, ky;
+		long currentTime, timeDelta;
+
+		/* initialize values as zeroes when the drag starts */
+		if(!this.pointerDrag) {
+			this.kineticMoveX = 0f;
+			this.kineticMoveY = 0f;
+			return;
+		}
+
+		/* Compute time difference between previous
+		 * update and current */
+		currentTime = System.currentTimeMillis();
+		timeDelta = currentTime - this.prevInputTime;
+		this.prevInputTime = currentTime;
+
+		if(timeDelta == 0) return;
+
+		kx = this.pointerPrevX - e.getX();
+		ky = this.pointerPrevY - e.getY();
+
+		kx /= timeDelta;
+		ky /= timeDelta;
+
+		/* change the kinetic values slowly */
+		this.kineticMoveX = kx * .01f + this.kineticMoveX * .99f;
+		this.kineticMoveY = ky * .01f + this.kineticMoveY * .99f;
+	}
+
+	/**
+	 * Apply the kinetic move variables to view position or zoom.
+	 */
+	private void applyKineticMotion() {
+		long currentTime, timeDelta;
+
+		if(this.pointerDrag) return;
+
+		currentTime = System.currentTimeMillis();
+		timeDelta = currentTime - this.prevFrameTime;
+		this.prevFrameTime = currentTime;
+
+		if(this.mouseEvent == MOUSE_MOVE) {
+			this.x += this.kineticMoveX * timeDelta / this.zoom;
+			this.y += this.kineticMoveY * timeDelta / this.zoom;
+
+		} else if(this.mouseEvent == MOUSE_ZOOM) {
+			this.zoom *= (float)Math.pow(2.0,
+				this.kineticMoveY * timeDelta * .01);
+		}
+
+		this.kineticMoveX *= 1 - 0.001f * timeDelta;
+		this.kineticMoveY *= 1 - 0.001f * timeDelta;
+	}
+
+	/**
 	 * Mouse dragging event handler.
 	 */
 	public void mouseDragged(MouseEvent e) {
@@ -92,8 +157,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 			this.pointerPrevX = e.getX();
 			this.pointerPrevY = e.getY();
 		}
-		this.kineticMoveX = this.pointerPrevX - e.getX();
-		this.kineticMoveY = this.pointerPrevY - e.getY();
+		mouseInputUpdate(e);
 		this.pointerPrevX = e.getX();
 		this.pointerPrevY = e.getY();
 		this.pointerDrag = true;
@@ -178,8 +242,11 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		if(this.mouseEvent == MOUSE_ADD) {
 			System.out.println("add particles");
 		}
+		/* Mouse event is left as is so that the kinetic move
+		 * will affect correct variables. */
+		mouseInputUpdate(e);
+
 		this.pointerDrag = false;
-		this.mouseEvent = MOUSE_NONE;
 	}
 
 	/**
@@ -223,19 +290,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		contentHeight = this.getHeight() -
 		                windowFrame.top - windowFrame.left;
 
-		if(!this.pointerDrag && this.mouseEvent == MOUSE_MOVE) {
-			this.x += this.kineticMoveX * .1;
-			this.y += this.kineticMoveY * .1;
-
-			this.kineticMoveX *= 0.99f;
-			this.kineticMoveY *= 0.99f;
-
-		} else if(!this.pointerDrag &&
-		          this.mouseEvent == MOUSE_ZOOM) {
-			//this.zoom *= 1.0 + this.kineticMoveY * .1;
-			//this.kineticMoveX  = 0;
-			//this.kineticMoveY *= 0.99f;
-		}
+		applyKineticMotion();
 
 		g = this.offscreenGraphics;
 		x_offset = -this.x * this.zoom + windowFrame.left +
