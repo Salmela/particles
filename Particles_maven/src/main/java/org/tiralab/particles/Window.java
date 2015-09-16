@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import java.awt.Frame;
 import java.awt.Insets;
 import java.awt.Graphics;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.FontMetrics;
 import java.awt.AWTEvent;
@@ -211,13 +212,19 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 			//this.kineticMoveY *= 0.99f;
 		}
 
+		g = this.offscreenGraphics;
 		x_offset = -this.x * this.zoom + windowFrame.left +
 		           contentWidth / 2;
 		y_offset = -this.y * this.zoom + windowFrame.top +
 		           contentHeight / 2;
 
-		g = this.offscreenGraphics;
-		g.clearRect(0, 0, getWidth(), getHeight());
+		/* Draw the whole screen with semi-transparent white.
+		 * This will create motion blur effect.
+		 */
+		g.setColor(new Color(1f, 1f, 1f, 0.3f));
+		g.fillRect(0, 0, getWidth(), getHeight());
+		/* restore the color of the paint */
+		g.setColor(new Color(0f, 0f, 0f, 1f));
 
 		/*TODO: replace this.x with x_offset */
 		particles = listener.fetchParticles((int)this.x, (int)this.y,
