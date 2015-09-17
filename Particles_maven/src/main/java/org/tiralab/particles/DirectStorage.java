@@ -16,7 +16,7 @@ public class DirectStorage implements Storage {
 		this.model = model;
 		this.model.setStorage(this);
 
-		this.update();
+		this.updateParticles();
 	}
 
 	public Particle[] getObjectsAtArea(float x, float y,
@@ -30,18 +30,14 @@ public class DirectStorage implements Storage {
 	}
 
 	public void addParticle(Particle particle) {
-		this.update();
+		this.updateParticles();
 	}
 
 	public void removeParticle(Particle particle) {
-		this.update();
+		this.updateParticles();
 	}
 
-	public void moveParticle(Particle particle) {
-		this.update();
-	}
-
-	private void update() {
+	public void updateParticles() {
 		this.array = model.getParticles();
 	}
 }

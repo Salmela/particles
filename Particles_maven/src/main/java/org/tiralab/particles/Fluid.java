@@ -112,5 +112,7 @@ public class Fluid implements Model {
 
 			particle.set(x, y);
 		}
+
+		storage.updateParticles();
 	}
 }

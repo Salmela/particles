@@ -36,5 +36,5 @@ public interface Storage {
 
 	void addParticle(Particle particle);
 	void removeParticle(Particle particle);
-	void moveParticle(Particle particle);
+	void updateParticles();
 }

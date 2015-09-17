@@ -81,5 +81,7 @@ public class Stars implements Model {
 
 			particle.set(x, y);
 		}
+
+		storage.updateParticles();
 	}
 }
