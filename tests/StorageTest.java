@@ -49,18 +49,20 @@ public class StorageTest implements Model {
 	public void testParticleAdd() {
 		Storage storage = createInstance();
 		Particle[] output;
+		Particle p;
 		boolean[] b;
 		int i;
 		if(storage == null) return;
 
+		p = new Particle(2f, 3f);
 		this.particles = new Particle[1];
-		this.particles[0] = new Particle(6f, 1f);
+		this.particles[0] = p;
 
 		storage.setModel(this);
 
 		b = new boolean[2];
 		this.particles = new Particle[2];
-		this.particles[0] = new Particle(2f, 3f);
+		this.particles[0] = p;
 		this.particles[1] = new Particle(6f, 1f);
 		this.storage.addParticle(particles[1]);
 
@@ -73,7 +75,7 @@ public class StorageTest implements Model {
 				b[1] = !b[1];
 			}
 		}
-		Assert.assertTrue(b[0]); /* this fails for array storage */
+		Assert.assertTrue(b[0]);
 		Assert.assertTrue(b[1]);
 	}
 
