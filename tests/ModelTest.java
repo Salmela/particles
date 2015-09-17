@@ -12,13 +12,33 @@ public class ModelTest {
 		return null;
 	}
 
-	//TODO implement tests for these methods
-	//Particle[] getParticles();
-	//void simulate();
+	@Test
+	public void particleArrayNotNull() {
+		Model model = createInstance();
+		Particle[] particles;
+		if(model == null) return;
+
+		particles = model.getParticles();
+		Assert.assertNotSame(null, particles);
+	}
 
 	@Test
-	public void test() {
+	public void simulateDoesntCrash() {
 		Model model = createInstance();
 		if(model == null) return;
+
+		model.simulate();
+	}
+
+	@Test
+	public void simulationDoesntCrash() {
+		Model model = createInstance();
+		int i;
+
+		if(model == null) return;
+
+		for(i = 0; i < 100; i++) {
+			model.simulate();
+		}
 	}
 }
