@@ -5,7 +5,7 @@ package org.tiralab.particles;
  */
 public interface Storage {
 	/**
-	 * Get all particles that are intersecting the rectangle(x,y,w,h).
+	 * Get at least all the particles that are intersecting the rectangle(x,y,w,h).
 	 *
 	 * @param x The x coordinate of the rectangle
 	 * @param y The y coordinate of the rectangle
@@ -16,7 +16,7 @@ public interface Storage {
 	Particle[] getObjectsAtArea(float x, float y, float w, float h);
 
 	/**
-	 * Get nearest particle that is to point (x, y).
+	 * Get the nearest particle that is to point (x, y).
 	 *
 	 * @param x The x coordinate of the point
 	 * @param y The y coordinate of the point
