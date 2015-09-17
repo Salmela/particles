@@ -25,8 +25,24 @@ public class DirectStorage implements Storage {
 	}
 
 	public Particle getObjectAtPoint(float x, float y) {
-		/*FIXME this is incorrect implementation */
-		return array[0];
+		int i, min = -1;
+		float min_dist = Float.MAX_VALUE;
+
+		for(i = 0; i < array.length; i++) {
+			Particle p = array[i];
+			float dist;
+
+			dist  = (p.getX() - x) * (p.getX() - x);
+			dist += (p.getY() - y) * (p.getY() - y);
+
+			if(dist < min_dist) {
+				min_dist = dist;
+				min = i;
+			}
+		}
+
+		if(min == -1) return null;
+		return array[min];
 	}
 
 	public void addParticle(Particle particle) {
