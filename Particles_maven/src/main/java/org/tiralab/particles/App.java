@@ -14,11 +14,12 @@ public class App implements GuiListener {
 		this.window.setVisible(true);
 
 		this.models = new Model[2];
-		this.storages = new Storage[1];
+		this.storages = new Storage[2];
 
 		this.models[0] = new Stars();
 		this.models[1] = new Fluid();
 		this.storages[0] = new DirectStorage();
+		this.storages[1] = new ArrayStorage();
 
 		this.activeStorage = this.storages[0];
 		this.activeModel = this.models[0];
