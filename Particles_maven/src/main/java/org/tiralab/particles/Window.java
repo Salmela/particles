@@ -124,7 +124,10 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 	private void applyKineticMotion() {
 		long currentTime, timeDelta;
 
-		if(this.pointerDrag) return;
+		if(this.pointerDrag) {
+			this.prevFrameTime = System.currentTimeMillis();
+			return;
+		}
 
 		currentTime = System.currentTimeMillis();
 		timeDelta = currentTime - this.prevFrameTime;
