@@ -10,6 +10,11 @@ public class TreeStorage implements Storage {
 	private Model model;
 	private QuadTree root;
 
+	/**
+	 * Implementation of quadtree.
+	 *
+	 * TODO Move this to separate file and create unit tests for it.
+	 */
 	private abstract class QuadTree {
 		protected QuadTreeNode parent;
 		protected float x, y, size;
