@@ -1,4 +1,4 @@
-## Implementation
+# Implementation
 
 This project contains three spatial data structures that are interchangeable. It also has two models that can be used for testing the data structures. The project has also gui, which can be used to visualise the data structures(not yet).
 
