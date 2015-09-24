@@ -277,7 +277,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		Graphics g;
 		Particle[] particles;
 		int contentWidth, contentHeight, i;
-		float x_offset, y_offset;
+		float offsetX, offsetY;
 		String text;
 		Insets windowFrame;
 
@@ -295,10 +295,18 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 
 		applyKineticMotion();
 
+		/*TODO: use floats instead of ints*/
+		offsetX = this.x - contentWidth / (2 * this.zoom);
+		offsetY = this.y - contentHeight / (2 * this.zoom);
+		particles = listener.fetchParticles(
+			(int)offsetX, (int)offsetY,
+			(int)(contentWidth / this.zoom),
+			(int)(contentHeight / this.zoom));
+
 		g = this.offscreenGraphics;
-		x_offset = -this.x * this.zoom + windowFrame.left +
+		offsetX = -this.x * this.zoom + windowFrame.left +
 		           contentWidth / 2;
-		y_offset = -this.y * this.zoom + windowFrame.top +
+		offsetY = -this.y * this.zoom + windowFrame.top +
 		           contentHeight / 2;
 
 		/* Draw the whole screen with semi-transparent white.
@@ -309,14 +317,10 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		/* restore the color of the paint */
 		g.setColor(new Color(0f, 0f, 0f, 1f));
 
-		/*TODO: replace this.x with x_offset */
-		particles = listener.fetchParticles((int)this.x, (int)this.y,
-			contentWidth, contentHeight);
-
 		for(i = 0; i < particles.length; i++) {
 			Particle p = particles[i];
-			g.fillOval((int)(x_offset + p.getX() * this.zoom - 1),
-			           (int)(y_offset + p.getY() * this.zoom - 1),
+			g.fillOval((int)(offsetX + p.getX() * this.zoom - 1),
+			           (int)(offsetY + p.getY() * this.zoom - 1),
 			           2, 2);
 		}
 
