@@ -127,7 +127,7 @@ public class TreeStorage implements Storage {
 				if(this.particles[i] == particle) break;
 			}
 			if(i == this.particleCount) {
-				System.out.println("The particle was attempted to be removed from incorrect leaf." + particle.getPrevX() +","+ particle.getPrevX());
+				System.out.println("The particle was attempted to be removed from incorrect leaf.");
 				//System.exit(-1);
 				return;
 			}
