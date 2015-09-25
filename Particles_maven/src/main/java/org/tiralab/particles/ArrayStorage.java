@@ -8,7 +8,7 @@ import java.util.HashSet;
  * TODO: Add dynamic resizing.
  */
 public class ArrayStorage implements Storage {
-	private ArrayList[][] array;
+	private ParticleArray[][] array;
 	private Model model;
 	private int size = 200, cellSize = 20;
 	private int x, y;
@@ -17,7 +17,7 @@ public class ArrayStorage implements Storage {
 	}
 
 	private void reset() {
-		this.array = new ArrayList[size][size];
+		this.array = new ParticleArray[size][size];
 		this.x = this.y = 0;
 	}
 
@@ -64,11 +64,12 @@ public class ArrayStorage implements Storage {
 
 		for(i = cellX; i <= endX; i++) {
 			for(j = cellY; j <= endY; j++) {
-				ArrayList<Particle> a;
-				a = (ArrayList<Particle>)array[i][j];
+				ParticleArray cellArray;
 
-				if(a == null) continue;
-				for(Particle p : a) {
+				cellArray = array[i][j];
+				if(cellArray == null) continue;
+
+				for(Particle p : cellArray) {
 					set.add(p);
 				}
 			}
@@ -82,34 +83,33 @@ public class ArrayStorage implements Storage {
 	}
 
 	public void addParticle(Particle particle) {
-		ArrayList<Particle> a;
+		ParticleArray array;
 		int cellX, cellY;
 
 		cellX = getCellPosition(particle.getX(), true);
 		cellY = getCellPosition(particle.getY(), false);
 
-		a = (ArrayList<Particle>)this.array[cellX][cellY];
-		if(a == null) {
-			a = new ArrayList<Particle>();
-			this.array[cellX][cellY] = (ArrayList)a;
+		array = this.array[cellX][cellY];
+		if(array == null) {
+			array = new ParticleArray();
+			this.array[cellX][cellY] = array;
 		}
-		a.add(particle);
+		array.add(particle);
 	}
 
 	public void removeParticle(Particle particle) {
-		ArrayList<Particle> a;
+		ParticleArray array;
 		int cellX, cellY;
 
 		cellX = getCellPosition(particle.getX(), true);
 		cellY = getCellPosition(particle.getY(), false);
 
-		a = (ArrayList<Particle>)this.array[cellX][cellY];
-		if(a == null) {
+		array = this.array[cellX][cellY];
+		if(array == null) {
 			/* This should never happen except at start. */
 			return;
 		}
-
-		a.remove(particle);
+		array.remove(particle);
 	}
 
 	public void updateParticles() {
