@@ -123,4 +123,14 @@ public class ParticleArray implements Iterable<Particle> {
 		}
 		return -1;
 	}
+
+	public Particle[] toArray() {
+		Particle[] returnArray;
+
+		returnArray = new Particle[this.size];
+		System.arraycopy(this.array, 0, returnArray, 0,
+			this.size);
+
+		return returnArray;
+	}
 }
