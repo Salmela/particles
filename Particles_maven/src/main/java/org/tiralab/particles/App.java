@@ -82,10 +82,16 @@ public class App implements GuiListener {
 	 * top-right corner of the window.
 	 */
 	public String getHeaderText() {
-		return String.format("[%s] %d, %d",
+		/*TODO implement */
+		int size = 0;//this.activeStorage.getMemoryConsumption();
+
+		return String.format("FPS: %d, [%s/%s] (%d, %d) %dB",
+			(int)this.window.getFPS(),
 			this.activeModel.getClass().getSimpleName(),
+			this.activeStorage.getClass().getSimpleName(),
 			(int)this.window.getScrollX(),
-			(int)this.window.getScrollY());
+			(int)this.window.getScrollY(),
+			size);
 	}
 
 	/**
