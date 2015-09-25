@@ -41,6 +41,7 @@ public class ParticleSet {
 			this.array[hash] = bucket;
 		}
 
+		if(bucket.contains(particle)) return;
 		bucket.add(particle);
 	}
 
