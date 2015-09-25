@@ -32,6 +32,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 
 	private long prevFrameTime;
 	private long prevInputTime;
+	private float fps;
 
 	/* These are for detecting size changes */
 	private int oldWidth, oldHeight;
@@ -118,21 +119,20 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		this.kineticMoveY = ky * .01f + this.kineticMoveY * .99f;
 	}
 
-	/**
-	 * Apply the kinetic move variables to view position or zoom.
-	 */
-	private void applyKineticMotion() {
+	public int computeTimeDelta() {
 		long currentTime, timeDelta;
-
-		if(this.pointerDrag) {
-			this.prevFrameTime = System.currentTimeMillis();
-			return;
-		}
 
 		currentTime = System.currentTimeMillis();
 		timeDelta = currentTime - this.prevFrameTime;
 		this.prevFrameTime = currentTime;
 
+		return (int)timeDelta;
+	}
+
+	/**
+	 * Apply the kinetic move variables to view position or zoom.
+	 */
+	private void applyKineticMotion(int timeDelta) {
 		if(this.mouseEvent == MOUSE_MOVE) {
 			this.x += this.kineticMoveX * timeDelta / this.zoom;
 			this.y += this.kineticMoveY * timeDelta / this.zoom;
@@ -277,6 +277,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		Graphics g;
 		Particle[] particles;
 		int contentWidth, contentHeight, i;
+		int timeDelta;
 		float offsetX, offsetY;
 		String text;
 		Insets windowFrame;
@@ -293,7 +294,10 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		contentHeight = this.getHeight() -
 		                windowFrame.top - windowFrame.left;
 
-		applyKineticMotion();
+		timeDelta = computeTimeDelta();
+		applyKineticMotion(timeDelta);
+
+		this.fps = (1000.0f / timeDelta) * .01f + this.fps * .99f;
 
 		/*TODO: use floats instead of ints*/
 		offsetX = this.x - contentWidth / (2 * this.zoom);
@@ -354,5 +358,12 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 	 */
 	public float getScrollY() {
 		return this.y;
+	}
+
+	/**
+	 * Gets the fps.
+	 */
+	public float getFPS() {
+		return this.fps;
 	}
 }
