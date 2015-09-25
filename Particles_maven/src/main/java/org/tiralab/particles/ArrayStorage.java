@@ -1,8 +1,5 @@
 package org.tiralab.particles;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 /**
  * Array based particle storage.
  * TODO: Add dynamic resizing.
@@ -53,7 +50,7 @@ public class ArrayStorage implements Storage {
 	                                   float w, float h) {
 		int cellX, cellY, endX, endY;
 		int i, j;
-		HashSet<Particle> set = new HashSet<Particle>();
+		ParticleSet set = new ParticleSet();
 
 
 		cellX = getCellPosition(x, true);
@@ -75,7 +72,7 @@ public class ArrayStorage implements Storage {
 			}
 		}
 
-		return set.toArray(new Particle[0]);
+		return set.toArray();
 	}
 
 	public Particle getObjectAtPoint(float x, float y) {

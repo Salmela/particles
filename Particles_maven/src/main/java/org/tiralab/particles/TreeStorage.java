@@ -1,7 +1,5 @@
 package org.tiralab.particles;
 
-import java.util.HashSet;
-
 /**
  * This acceleration structure stores the particles in quadtree.
  */
@@ -73,7 +71,7 @@ public class TreeStorage implements Storage {
 		abstract public void reset();
 		abstract public void insert(Particle particle);
 		abstract public void remove(Particle particle);
-		abstract public void get(HashSet<Particle> set, float x, float y, float width, float height);
+		abstract public void get(ParticleSet set, float x, float y, float width, float height);
 	}
 
 	private class QuadTreeLeaf extends QuadTree {
@@ -138,7 +136,7 @@ public class TreeStorage implements Storage {
 			this.particleCount--;
 		}
 
-		public void get(HashSet<Particle> set, float x, float y, float width, float height) {
+		public void get(ParticleSet set, float x, float y, float width, float height) {
 			int i;
 
 			for(i = 0; i < this.particleCount; i++) {
@@ -236,7 +234,7 @@ public class TreeStorage implements Storage {
 			this.childs[childID].remove(particle);
 		}
 
-		public void get(HashSet<Particle> set, float x, float y, float width, float height) {
+		public void get(ParticleSet set, float x, float y, float width, float height) {
 			boolean getTop, getBottom, getLeft, getRight;
 
 			getTop = (y + height > this.y);
@@ -269,11 +267,11 @@ public class TreeStorage implements Storage {
 
 	public Particle[] getObjectsAtArea(float x, float y,
 	                                   float w, float h) {
-		HashSet<Particle> set = new HashSet<Particle>();
+		ParticleSet set = new ParticleSet();
 
 		this.root.get(set, x, y, w, h);
 
-		return set.toArray(new Particle[0]);
+		return set.toArray();
 	}
 
 	public Particle getObjectAtPoint(float x, float y) {
