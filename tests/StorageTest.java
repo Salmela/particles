@@ -122,4 +122,8 @@ public class StorageTest implements Model {
 	@Override
 	public void simulate() {
 	}
+
+	@Override
+	public void reset() {
+	}
 }
