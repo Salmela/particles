@@ -44,6 +44,8 @@ public class ParticleArray implements Iterable<Particle> {
 
 	/**
 	 * Get a iterator for the array.
+	 *
+	 * @return The iterator for traversing Particle.
 	 */
 	public Iterator<Particle> iterator() {
 		return new ParticleIterator();
@@ -119,9 +121,9 @@ public class ParticleArray implements Iterable<Particle> {
 	 *
 	 * @param particle The particle
 	 * @return
-	 * Gives the index of the particle. The function
-	 * returns -1 if the array doesn't contain
-	 * the particle.
+	 * Gives the index of the particle in the array.
+	 * The function returns -1 if the array doesn't
+	 * contain the particle.
 	 */
 	public int getIndexOf(Particle particle) {
 		int i;
@@ -134,6 +136,11 @@ public class ParticleArray implements Iterable<Particle> {
 		return -1;
 	}
 
+	/**
+	 * Get a plain array.
+	 *
+	 * @return The array.
+	 */
 	public Particle[] toArray() {
 		Particle[] returnArray;
 
