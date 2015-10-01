@@ -1,14 +1,25 @@
 package org.tiralab.particles;
 
+/**
+ * This class is set for particle objects.
+ *
+ * It is implements as simple hash table.
+ */
 public class ParticleSet {
 	private ParticleArray[] array;
 	private int size;
 
+	/**
+	 * Constructor that creates a empty set.
+	 */
 	public ParticleSet() {
 		this.size = 0;
 		this.array = new ParticleArray[8];
 	}
 
+	/**
+	 * Resize the hash table when it's full.
+	 */
 	private void resize() {
 		ParticleArray[] oldArray;
 		int i;
@@ -24,6 +35,13 @@ public class ParticleSet {
 		}
 	}
 
+	/**
+	 * Add particle to the set.
+	 *
+	 * It isn't added if the set is already added.
+	 *
+	 * @param The particle
+	 */
 	public void add(Particle particle) {
 		ParticleArray bucket;
 		int hash;
@@ -45,6 +63,11 @@ public class ParticleSet {
 		bucket.add(particle);
 	}
 
+	/**
+	 * Get a array of the particles in the set.
+	 *
+	 * @return The array.
+	 */
 	public Particle[] toArray() {
 		ParticleArray array = new ParticleArray();
 		int i;

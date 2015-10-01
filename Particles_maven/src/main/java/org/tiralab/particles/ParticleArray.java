@@ -12,6 +12,9 @@ public class ParticleArray implements Iterable<Particle> {
 	private Particle[] array;
 	private int size;
 
+	/**
+	 * Iterator used for iterating the array.
+	 */
 	private class ParticleIterator implements Iterator<Particle> {
 		private int index;
 
@@ -39,6 +42,9 @@ public class ParticleArray implements Iterable<Particle> {
 		this.array = new Particle[8];
 	}
 
+	/**
+	 * Get a iterator for the array.
+	 */
 	public Iterator<Particle> iterator() {
 		return new ParticleIterator();
 	}
