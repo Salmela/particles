@@ -83,8 +83,7 @@ public class App implements GuiListener {
 	 * top-right corner of the window.
 	 */
 	public String getHeaderText() {
-		/*TODO implement */
-		int size = 0;//this.activeStorage.getMemoryConsumption();
+		int size = this.activeStorage.getMemoryConsumption();
 
 		return String.format("FPS: %d, [%s/%s] (%d, %d) %dB",
 			(int)this.window.getFPS(),
@@ -110,6 +109,6 @@ public class App implements GuiListener {
 	 * Give the debug rectangle.
 	 */
 	public Rectangle[] getDebugRectangles() {
-		return new Rectangle[0];
+		return this.activeStorage.getDebugRectangle();
 	}
 }

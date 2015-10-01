@@ -28,13 +28,44 @@ public interface Storage {
 	 * Set model of storage.
 	 *
 	 * The model is needed for getting all particles.
+	 *
 	 * @param model The new model for the storage.
 	 */
 	void setModel(Model model);
 
-	/* Signal handlers for the model */
+	/**
+	 * Approximate memory consumption in bytes.
+	 * @return Memory usage in bytes.
+	 */
+	int getMemoryConsumption();
 
+	/**
+	 * Get rectangles that visualizes the data structure.
+	 * @return The array of rectangles.
+	 */
+	Rectangle[] getDebugRectangle();
+
+	/* ------ Signal handlers for the model ------ */
+
+	/**
+	 * Signal for telling the storage object that the
+	 * model created new particle.
+	 *
+	 * @param particle The new particle.
+	 */
 	void addParticle(Particle particle);
+
+	/**
+	 * Signal for telling the storage object that the
+	 * model removed a particle.
+	 *
+	 * @param particle The remoded particle.
+	 */
 	void removeParticle(Particle particle);
+
+	/**
+	 * Signal for requesting the storage object to
+	 * update all particles loctations.
+	 */
 	void updateParticles();
 }

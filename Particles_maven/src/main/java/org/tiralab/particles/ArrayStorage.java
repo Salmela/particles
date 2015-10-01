@@ -118,4 +118,27 @@ public class ArrayStorage implements Storage {
 			addParticle(array[i]);
 		}
 	}
+
+	public int getMemoryConsumption() {
+		return 0;
+	}
+
+	public Rectangle[] getDebugRectangle() {
+		Rectangle[] rectangles;
+		int i;
+
+		rectangles = new Rectangle[this.size * 2];
+
+		for(i = 0; i < this.size; i++) {
+			rectangles[i * 2] = new Rectangle(0,
+				i * this.cellSize,
+				this.cellSize * this.size,
+				this.cellSize);
+			rectangles[i * 2 + 1] = new Rectangle(i * this.cellSize,
+				0, this.cellSize,
+				this.cellSize * this.size);
+		}
+
+		return rectangles;
+	}
 }

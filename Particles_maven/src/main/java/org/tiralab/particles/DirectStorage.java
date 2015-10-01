@@ -56,4 +56,12 @@ public class DirectStorage implements Storage {
 	public void updateParticles() {
 		this.array = model.getParticles();
 	}
+
+	public int getMemoryConsumption() {
+		return 0;
+	}
+
+	public Rectangle[] getDebugRectangle() {
+		return new Rectangle[0];
+	}
 }

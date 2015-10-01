@@ -68,6 +68,17 @@ public class TreeStorage implements Storage {
 			return this.parent;
 		}
 
+		int getDebugRectangle(Rectangle[] array, int index) {
+			float half;
+			if(index >= array.length) return index;
+
+			half = this.size / 2;
+			array[index] = new Rectangle(this.x - half, this.y - half,
+				this.size, this.size);
+
+			return index + 1;
+		}
+
 		abstract public void reset();
 		abstract public void insert(Particle particle);
 		abstract public void remove(Particle particle);
@@ -251,6 +262,18 @@ public class TreeStorage implements Storage {
 			if(getBottom && getLeft)
 				childs[CHILD_BL].get(set, x, y, width, height);
 		}
+
+		@Override
+		int getDebugRectangle(Rectangle[] array, int index) {
+			index = super.getDebugRectangle(array, index);
+
+			index = this.childs[0].getDebugRectangle(array, index);
+			index = this.childs[1].getDebugRectangle(array, index);
+			index = this.childs[2].getDebugRectangle(array, index);
+			index = this.childs[3].getDebugRectangle(array, index);
+
+			return index;
+		}
 	}
 
 	public TreeStorage() {
@@ -290,11 +313,26 @@ public class TreeStorage implements Storage {
 		Particle[] array;
 		int i;
 
-		this.root.reset();
 		array = model.getParticles();
 
+		this.root.reset();
 		for(i = 0; i < array.length; i++) {
 			this.root.insert(array[i]);
 		}
+	}
+
+	public int getMemoryConsumption() {
+		return -1;
+	}
+
+	public Rectangle[] getDebugRectangle() {
+		Rectangle[] rects, array = new Rectangle[256];
+		int size;
+
+		size = this.root.getDebugRectangle(array, 0);
+		rects = new Rectangle[size];
+
+		System.arraycopy(array, 0, rects, 0, size);
+		return rects;
 	}
 }
