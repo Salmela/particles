@@ -64,6 +64,8 @@ public class ParticleArray implements Iterable<Particle> {
 	 * @param particle The particle
 	 */
 	public void add(Particle particle) {
+		if(particle == null) return;
+
 		/* increase the array */
 		if(this.array.length == this.size) {
 			Particle[] newArray;
@@ -87,6 +89,12 @@ public class ParticleArray implements Iterable<Particle> {
 	public void remove(Particle particle) {
 		int index;
 
+		index = this.getIndexOf(particle);
+		if(index == -1) return;
+
+		/* replace the removed particle with the last one */
+		this.array[index] = this.array[--this.size];
+
 		/* shrink the array */
 		if(this.array.length == this.size * 2) {
 			Particle[] newArray;
@@ -95,12 +103,6 @@ public class ParticleArray implements Iterable<Particle> {
 				this.size);
 			this.array = newArray;
 		}
-
-		index = this.getIndexOf(particle);
-		if(index == -1) return;
-
-		/* replace the removed particle with the last one */
-		this.array[index] = this.array[--size];
 	}
 
 	/**
@@ -123,6 +125,8 @@ public class ParticleArray implements Iterable<Particle> {
 	 */
 	public int getIndexOf(Particle particle) {
 		int i;
+
+		if(particle == null) return -1;
 
 		for(i = 0; i < this.size; i++) {
 			if(this.array[i] == particle) return i;
