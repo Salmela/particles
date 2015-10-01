@@ -11,6 +11,11 @@ package org.tiralab.particles;
  */
 public interface Model {
 	/**
+	 * Reset the model.
+	 */
+	void reset();
+
+	/**
 	 * Get all particles from model in array.
 	 *
 	 * @return Gives every particle in the model.

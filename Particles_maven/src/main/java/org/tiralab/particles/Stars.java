@@ -10,9 +10,14 @@ public class Stars implements Model {
 	private Storage storage;
 
 	public Stars() {
-		int i;
-		Random rand = new Random();
 
+		this.reset();
+	}
+
+	public void reset() {
+		int i;
+
+		Random rand = new Random();
 		this.p = new Particle[128];
 
 		for(i = 0; i < p.length; i++) {

@@ -10,6 +10,10 @@ public class Fluid implements Model {
 	private Storage storage;
 
 	public Fluid() {
+		this.reset();
+	}
+
+	public void reset() {
 		int i;
 		Random rand = new Random();
 
