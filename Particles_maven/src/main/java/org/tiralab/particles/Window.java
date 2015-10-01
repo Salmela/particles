@@ -336,7 +336,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 
 			for(i = 0; i < rectangles.length; i++) {
 				Rectangle r = rectangles[i];
-				g.fillRect((int)(offsetX + r.getX() * this.zoom),
+				g.drawRect((int)(offsetX + r.getX() * this.zoom),
 					(int)(offsetY + r.getY() * this.zoom),
 					(int)(r.getWidth() * this.zoom),
 					(int)(r.getHeight() * this.zoom));
