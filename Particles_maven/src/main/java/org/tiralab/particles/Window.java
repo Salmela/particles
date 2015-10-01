@@ -29,6 +29,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 	private Image offscreenBuffer;
 	private Graphics offscreenGraphics;
 	private boolean paused;
+	private boolean debugMode;
 
 	private long prevFrameTime;
 	private long prevInputTime;
@@ -58,6 +59,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		this.listener = listener;
 		this.zoom = 1.0f;
 		this.paused = false;
+		this.debugMode = false;
 
 		this.pointerDrag = false;
 		this.prevFrameTime = System.currentTimeMillis();
@@ -302,7 +304,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		/*TODO: use floats instead of ints*/
 		offsetX = this.x - contentWidth / (2 * this.zoom);
 		offsetY = this.y - contentHeight / (2 * this.zoom);
-		particles = listener.fetchParticles(
+		particles = this.listener.fetchParticles(
 			(int)offsetX, (int)offsetY,
 			(int)(contentWidth / this.zoom),
 			(int)(contentHeight / this.zoom));
@@ -324,8 +326,21 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		for(i = 0; i < particles.length; i++) {
 			Particle p = particles[i];
 			g.fillOval((int)(offsetX + p.getX() * this.zoom - 1),
-			           (int)(offsetY + p.getY() * this.zoom - 1),
-			           2, 2);
+				(int)(offsetY + p.getY() * this.zoom - 1),
+				2, 2);
+		}
+
+		if(this.debugMode) {
+			Rectangle[] rectangles;
+			rectangles = this.listener.getDebugRectangles();
+
+			for(i = 0; i < rectangles.length; i++) {
+				Rectangle r = rectangles[i];
+				g.fillRect((int)(offsetX + r.getX() * this.zoom),
+					(int)(offsetY + r.getY() * this.zoom),
+					(int)(r.getWidth() * this.zoom),
+					(int)(r.getHeight() * this.zoom));
+			}
 		}
 
 		FontMetrics metrics = g.getFontMetrics();
@@ -340,6 +355,10 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		if(!this.paused) {
 			this.repaint();
 		}
+	}
+
+	public void setDebugMode(boolean mode) {
+		this.debugMode = mode;
 	}
 
 	/**

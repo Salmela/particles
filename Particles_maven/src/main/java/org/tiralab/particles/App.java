@@ -10,9 +10,6 @@ public class App implements GuiListener {
 	private Window window;
 
 	public App() {
-		this.window = new Window(this);
-		this.window.setVisible(true);
-
 		this.models = new Model[2];
 		this.storages = new Storage[3];
 
@@ -26,6 +23,10 @@ public class App implements GuiListener {
 		this.activeModel = this.models[0];
 
 		this.activeStorage.setModel(this.activeModel);
+
+		this.window = new Window(this);
+		this.window.setVisible(true);
+		this.window.setDebugMode(true);
 	}
 
 	public static void main(String[] args) {
@@ -103,5 +104,12 @@ public class App implements GuiListener {
 		activeModel.simulate();
 
 		return this.activeStorage.getObjectsAtArea(x, y, w, h);
+	}
+
+	/**
+	 * Give the debug rectangle.
+	 */
+	public Rectangle[] getDebugRectangles() {
+		return new Rectangle[0];
 	}
 }

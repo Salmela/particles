@@ -24,6 +24,11 @@ public interface GuiListener {
 	Particle[] fetchParticles(int x, int y, int w, int h);
 
 	/**
+	 * Get debug rectangles.
+	 */
+	Rectangle[] getDebugRectangles();
+
+	/**
 	 * Handle a key press.
 	 *
 	 * @param key The key as string.
