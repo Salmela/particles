@@ -26,7 +26,6 @@ public class App implements GuiListener {
 
 		this.window = new Window(this);
 		this.window.setVisible(true);
-		this.window.setDebugMode(true);
 	}
 
 	public static void main(String[] args) {
@@ -40,12 +39,17 @@ public class App implements GuiListener {
 			case 'M':
 				this.switchModel();
 				break;
-			/*TODO reset the model */
+			/* reset the model */
 			case 'R':
+				this.activeModel.reset();
 				break;
 			/* switch acceleration structure */
 			case 'A':
 				this.switchStorage();
+				break;
+			case 'V':
+				this.window.setDebugMode(
+					!this.window.getDebugMode());
 				break;
 		}
 	}
