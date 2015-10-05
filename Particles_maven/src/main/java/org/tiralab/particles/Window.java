@@ -357,8 +357,25 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		}
 	}
 
+	/**
+	 * Enable or disable the debug mode.
+	 *
+	 * The Window renders rectangles from GuiListener
+	 * when the debug mode is enabled.
+	 *
+	 * @param mode The setting
+	 */
 	public void setDebugMode(boolean mode) {
 		this.debugMode = mode;
+	}
+
+	/**
+	 * Get the debug mode.
+	 *
+	 * @return True if the debug mode is enabled.
+	 */
+	public boolean getDebugMode() {
+		return this.debugMode;
 	}
 
 	/**
