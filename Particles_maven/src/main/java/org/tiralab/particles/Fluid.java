@@ -8,8 +8,15 @@ import java.util.Random;
 public class Fluid implements Model {
 	private Particle p[];
 	private Storage storage;
+	private long initialParticleCount;
 
 	public Fluid() {
+		this.initialParticleCount = 256;
+		this.reset();
+	}
+
+	public void reset(long particleCount) {
+		this.initialParticleCount = particleCount;
 		this.reset();
 	}
 
@@ -17,7 +24,7 @@ public class Fluid implements Model {
 		int i;
 		Random rand = new Random();
 
-		this.p = new Particle[256];
+		this.p = new Particle[(int)this.initialParticleCount];
 
 		for(i = 0; i < p.length; i++) {
 			this.p[i] = new Particle(

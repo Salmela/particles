@@ -8,9 +8,15 @@ import java.util.Random;
 public class Stars implements Model {
 	private Particle p[];
 	private Storage storage;
+	private long initialParticleCount;
 
 	public Stars() {
+		this.initialParticleCount = 128;
+		this.reset();
+	}
 
+	public void reset(long particleCount) {
+		this.initialParticleCount = particleCount;
 		this.reset();
 	}
 
@@ -18,7 +24,7 @@ public class Stars implements Model {
 		int i;
 
 		Random rand = new Random();
-		this.p = new Particle[128];
+		this.p = new Particle[(int)this.initialParticleCount];
 
 		for(i = 0; i < p.length; i++) {
 			this.p[i] = new Particle(

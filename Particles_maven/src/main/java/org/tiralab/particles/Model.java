@@ -12,6 +12,11 @@ package org.tiralab.particles;
 public interface Model {
 	/**
 	 * Reset the model.
+	 * @param particleCount Number of the particles created.
+	 */
+	void reset(long particleCount);
+	/**
+	 * Reset the model with old parameters.
 	 */
 	void reset();
 

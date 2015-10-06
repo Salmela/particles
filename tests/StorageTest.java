@@ -124,6 +124,10 @@ public class StorageTest implements Model {
 	}
 
 	@Override
+	public void reset(long count) {
+	}
+
+	@Override
 	public void reset() {
 	}
 }
