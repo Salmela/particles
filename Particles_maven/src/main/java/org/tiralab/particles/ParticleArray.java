@@ -5,8 +5,8 @@ import java.util.Iterator;
 /**
  * The dynamic array.
  *
- * The data sturcture is dynamically growing array. It doesn't retain
- * insertation order, because of the implementation remove.
+ * The data structure is dynamically growing array. It doesn't retain
+ * insertion order, because of the implementation remove.
  */
 public class ParticleArray implements Iterable<Particle> {
 	private Particle[] array;
