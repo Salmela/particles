@@ -25,6 +25,8 @@ public interface GuiListener {
 
 	/**
 	 * Get debug rectangles.
+	 *
+	 * @return A array of debug rectangles.
 	 */
 	Rectangle[] getDebugRectangles();
 

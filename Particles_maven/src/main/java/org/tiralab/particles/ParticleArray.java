@@ -111,6 +111,7 @@ public class ParticleArray implements Iterable<Particle> {
 	 * The array contains particle.
 	 *
 	 * @param particle The particle
+	 * @return True if the array contains the particle.
 	 */
 	public boolean contains(Particle particle) {
 		return (this.getIndexOf(particle) >= 0);
