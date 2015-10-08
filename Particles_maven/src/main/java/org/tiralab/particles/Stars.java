@@ -33,6 +33,10 @@ public class Stars implements Model {
 			this.p[i].setVelocity(rand.nextInt() % 128,
 			                      rand.nextInt() % 128);
 		}
+
+		if(this.storage != null) {
+			this.storage.setModel(this);
+		}
 	}
 
 	public void setStorage(Storage storage) {

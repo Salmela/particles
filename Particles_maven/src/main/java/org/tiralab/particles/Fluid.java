@@ -31,6 +31,10 @@ public class Fluid implements Model {
 				rand.nextInt() % 64,
 				rand.nextInt() % 64);
 		}
+
+		if(this.storage != null) {
+			this.storage.setModel(this);
+		}
 	}
 
 	public void setStorage(Storage storage) {
