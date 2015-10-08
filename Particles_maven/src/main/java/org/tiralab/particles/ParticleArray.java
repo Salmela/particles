@@ -87,12 +87,13 @@ public class ParticleArray implements Iterable<Particle> {
 	 * removed particle.
 	 *
 	 * @param particle The particle
+	 * @return True if the particle was removed successfully.
 	 */
-	public void remove(Particle particle) {
+	public boolean remove(Particle particle) {
 		int index;
 
 		index = this.getIndexOf(particle);
-		if(index == -1) return;
+		if(index == -1) return false;
 
 		/* replace the removed particle with the last one */
 		this.array[index] = this.array[--this.size];
@@ -105,6 +106,8 @@ public class ParticleArray implements Iterable<Particle> {
 				this.size);
 			this.array = newArray;
 		}
+
+		return true;
 	}
 
 	/**
