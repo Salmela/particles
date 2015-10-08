@@ -7,6 +7,7 @@ public class TreeStorage implements Storage {
 	private Particle[] array;
 	private Model model;
 	private QuadTree root;
+	private boolean isEmpty;
 
 	/**
 	 * Implementation of quadtree.
@@ -64,7 +65,7 @@ public class TreeStorage implements Storage {
 			}
 		}
 
-		QuadTreeNode  getParent() {
+		QuadTreeNode getParent() {
 			return this.parent;
 		}
 
@@ -240,7 +241,7 @@ public class TreeStorage implements Storage {
 
 		public void remove(Particle particle) {
 			int childID = getChildIdAt(
-				particle.getX(), particle.getY());
+				particle.getPrevX(), particle.getPrevY());
 
 			this.childs[childID].remove(particle);
 		}
@@ -278,12 +279,16 @@ public class TreeStorage implements Storage {
 
 	public TreeStorage() {
 		this.root = new QuadTreeNode();
+		this.isEmpty = true;
 	}
 
 	public void setModel(Model model)
 	{
 		this.model = model;
 		this.model.setStorage(this);
+
+		this.root = new QuadTreeNode();
+		this.isEmpty = true;
 
 		this.updateParticles();
 	}
@@ -306,6 +311,7 @@ public class TreeStorage implements Storage {
 	}
 
 	public void removeParticle(Particle particle) {
+		if(Float.isNaN(particle.getPrevX())) return;
 		this.root.remove(particle);
 	}
 
@@ -315,10 +321,14 @@ public class TreeStorage implements Storage {
 
 		array = model.getParticles();
 
-		this.root.reset();
 		for(i = 0; i < array.length; i++) {
+			if(!this.isEmpty) {
+				this.root.remove(array[i]);
+			}
 			this.root.insert(array[i]);
+			array[i].setOld();
 		}
+		this.isEmpty = false;
 	}
 
 	public int getMemoryConsumption() {

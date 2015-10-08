@@ -2,9 +2,13 @@ package org.tiralab.particles;
 
 /**
  * Store information about single particle.
+ *
+ * TODO: The particle class should provide clean way to
+ * get previous values.
  */
 public class Particle {
 	private float x, y, vx, vy, radius;
+	private float prevX, prevY;
 
 	/**
 	 * This constructor allows you to set
@@ -15,6 +19,8 @@ public class Particle {
 	 */
 	public Particle(float x, float y) {
 		this.set(x, y);
+		this.prevX = Float.NaN;
+		this.prevY = Float.NaN;
 	}
 
 	/**
@@ -35,6 +41,26 @@ public class Particle {
 	 */
 	public float getY() {
 		return this.y;
+	}
+
+	/**
+	 * Getter for the previou x coordinate of
+	 * the particle.
+	 *
+	 * @return Gives the x coordinate.
+	 */
+	public float getPrevX() {
+		return this.prevX;
+	}
+
+	/**
+	 * Getter for the previous y coordinate of
+	 * the particle.
+	 *
+	 * @return Gives the y coordinate.
+	 */
+	public float getPrevY() {
+		return this.prevY;
 	}
 
 	/**
@@ -66,6 +92,17 @@ public class Particle {
 	public void set(float x, float y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	/**
+	 * Setter for the old particle position.
+	 *
+	 * @param x The new x coordinate.
+	 * @param y The new y coordinate.
+	 */
+	public void setOld() {
+		this.prevX = this.x;
+		this.prevY = this.y;
 	}
 
 	/**
