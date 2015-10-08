@@ -9,6 +9,7 @@ public class ArrayStorage implements Storage {
 	private Model model;
 	private int size = 200, cellSize = 20;
 	private int x, y;
+	private boolean isEmpty;
 
 	public ArrayStorage() {
 	}
@@ -16,6 +17,7 @@ public class ArrayStorage implements Storage {
 	private void reset() {
 		this.array = new ParticleArray[size][size];
 		this.x = this.y = 0;
+		this.isEmpty = true;
 	}
 
 	public void setModel(Model model)
@@ -28,10 +30,7 @@ public class ArrayStorage implements Storage {
 		this.model = model;
 		this.model.setStorage(this);
 
-		particles = model.getParticles();
-		for(i = 0; i < particles.length; i++) {
-			this.addParticle(particles[i]);
-		}
+		this.updateParticles();
 	}
 
 	private int getCellPosition(float d, boolean horizontal) {
@@ -98,15 +97,13 @@ public class ArrayStorage implements Storage {
 		ParticleArray array;
 		int cellX, cellY;
 
-		cellX = getCellPosition(particle.getX(), true);
-		cellY = getCellPosition(particle.getY(), false);
+		cellX = getCellPosition(particle.getPrevX(), true);
+		cellY = getCellPosition(particle.getPrevY(), false);
 
 		array = this.array[cellX][cellY];
-		if(array == null) {
-			/* This should never happen except at start. */
-			return;
+		if(array == null || !array.remove(particle)) {
+			System.out.println("The particle was attempted to be removed from incorrect cell.");
 		}
-		array.remove(particle);
 	}
 
 	public void updateParticles() {
@@ -114,9 +111,13 @@ public class ArrayStorage implements Storage {
 		int i;
 
 		for(i = 0; i < array.length; i++) {
-			removeParticle(array[i]);
+			if(!this.isEmpty) {
+				removeParticle(array[i]);
+			}
 			addParticle(array[i]);
+			array[i].setOld();
 		}
+		this.isEmpty = false;
 	}
 
 	public int getMemoryConsumption() {
