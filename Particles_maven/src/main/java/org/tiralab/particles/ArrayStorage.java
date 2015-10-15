@@ -22,9 +22,6 @@ public class ArrayStorage implements Storage {
 
 	public void setModel(Model model)
 	{
-		Particle[] particles;
-		int i;
-
 		reset();
 
 		this.model = model;
