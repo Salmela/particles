@@ -68,10 +68,23 @@ public class TreeStorage implements Storage {
 			}
 		}
 
+		/**
+		 * Give the parent QuadTreeNode of this node.
+		 * @return The parent
+		 */
 		public QuadTreeNode getParent() {
 			return this.parent;
 		}
 
+		/**
+		 * Add a rectangle, which represents this QuadTree node,
+		 * to the array.
+		 *
+		 * @param array Pre-allocated array for the debug rectangles.
+		 * @param index The index of the next unused rectangle
+		 *              in the array.
+		 * @return Gives the index of the next unused rectangle.
+		 */
 		public int getDebugRectangle(Rectangle[] array, int index) {
 			float half;
 			if(index >= array.length) return index;
@@ -83,6 +96,12 @@ public class TreeStorage implements Storage {
 			return index + 1;
 		}
 
+		/**
+		 * Check if a particle is inside the QuadTree.
+		 *
+		 * @param particle The checked particle
+		 * @return True if it's inside.
+		 */
 		public boolean isInside(Particle particle) {
 			float offsetX, offsetY;
 
