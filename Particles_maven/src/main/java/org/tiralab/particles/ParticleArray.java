@@ -23,7 +23,7 @@ public class ParticleArray implements Iterable<Particle> {
 		}
 		public boolean hasNext() {
 			int size = ParticleArray.this.size;
-			return (this.index + 1 < size);
+			return (this.index < size);
 		}
 		public Particle next() {
 			Particle[] array = ParticleArray.this.array;
