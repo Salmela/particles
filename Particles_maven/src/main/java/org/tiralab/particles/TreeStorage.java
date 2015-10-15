@@ -19,10 +19,13 @@ public class TreeStorage implements Storage {
 		protected float x, y, size;
 		protected int childID;
 
-		public static final int CHILD_TR = 0; /* top-right */
-		public static final int CHILD_TL = 1; /* top-left */
-		public static final int CHILD_BR = 2; /* bottom-right */
-		public static final int CHILD_BL = 3; /* bottom-left */
+		public static final int CHILD_TL = 0; /* top-left */
+		public static final int CHILD_TR = 1; /* top-right */
+		public static final int CHILD_BL = 2; /* bottom-left */
+		public static final int CHILD_BR = 3; /* bottom-right */
+
+		public QuadTree() {
+		}
 
 		public QuadTree(QuadTreeNode parent, int childID) {
 			float r;
@@ -43,21 +46,21 @@ public class TreeStorage implements Storage {
 			r = this.size / 2.0f;
 
 			switch(childID) {
-				case CHILD_TR:
-					this.y += r;
-					this.x += r;
-					break;
 				case CHILD_TL:
-					this.y += r;
+					this.y -= r;
 					this.x -= r;
 					break;
-				case CHILD_BR:
+				case CHILD_TR:
 					this.y -= r;
 					this.x += r;
 					break;
 				case CHILD_BL:
-					this.y -= r;
+					this.y += r;
 					this.x -= r;
+					break;
+				case CHILD_BR:
+					this.y += r;
+					this.x += r;
 					break;
 				default:
 					System.out.println("Should not happen.");
@@ -65,11 +68,11 @@ public class TreeStorage implements Storage {
 			}
 		}
 
-		QuadTreeNode getParent() {
+		public QuadTreeNode getParent() {
 			return this.parent;
 		}
 
-		int getDebugRectangle(Rectangle[] array, int index) {
+		public int getDebugRectangle(Rectangle[] array, int index) {
 			float half;
 			if(index >= array.length) return index;
 
@@ -78,6 +81,17 @@ public class TreeStorage implements Storage {
 				this.size, this.size);
 
 			return index + 1;
+		}
+
+		public boolean isInside(Particle particle) {
+			float offsetX, offsetY;
+
+			offsetX = particle.getX() - this.x + this.size / 2.0f;
+			offsetY = particle.getY() - this.y + this.size / 2.0f;
+
+			return (offsetX > 0.0 && offsetY > 0.0 &&
+				offsetX <= this.size &&
+				offsetY <= this.size);
 		}
 
 		abstract public void reset();
@@ -122,6 +136,7 @@ public class TreeStorage implements Storage {
 				node.insert(particle);
 				return;
 			}
+
 			this.particles[this.particleCount] = particle;
 			this.particleCount++;
 		}
@@ -138,7 +153,6 @@ public class TreeStorage implements Storage {
 			}
 			if(i == this.particleCount) {
 				System.out.println("The particle was attempted to be removed from incorrect leaf.");
-				//System.exit(-1);
 				return;
 			}
 
@@ -160,9 +174,22 @@ public class TreeStorage implements Storage {
 	private class QuadTreeNode extends QuadTree {
 		private QuadTree[] childs;
 
-		public QuadTreeNode() {
-			this(null, 0);
+		public QuadTreeNode(float x, float y, float size) {
+			super();
+			this.childID = 0;
+			this.x = x;
+			this.y = y;
+			this.size = size;
+			this.parent = null;
+
+			this.childs = new QuadTree[4];
+
+			this.childs[0] = new QuadTreeLeaf(this, 0);
+			this.childs[1] = new QuadTreeLeaf(this, 1);
+			this.childs[2] = new QuadTreeLeaf(this, 2);
+			this.childs[3] = new QuadTreeLeaf(this, 3);
 		}
+
 		public QuadTreeNode(QuadTreeNode parent, int childID) {
 			super(parent, childID);
 
@@ -172,6 +199,43 @@ public class TreeStorage implements Storage {
 			this.childs[1] = new QuadTreeLeaf(this, 1);
 			this.childs[2] = new QuadTreeLeaf(this, 2);
 			this.childs[3] = new QuadTreeLeaf(this, 3);
+		}
+
+		QuadTreeNode createNewRoot(float particleX, float particleY) {
+			QuadTreeNode root;
+			float positionX, positionY, half;
+			int childID;
+
+			if(this.parent != null) {
+				System.out.println("This method can be called only to root nodes.");
+				System.exit(1);
+			}
+
+			positionX = this.x;
+			positionY = this.y;
+			half = this.size / 2.0f;
+			childID = 0;
+
+			if(particleX < this.x) {
+				positionX -= half;
+				childID += 1;
+			} else {
+				positionX += half;
+			}
+
+			if(particleY < this.y) {
+				positionY -= half;
+			} else {
+				positionY += half;
+				childID += 2;
+			}
+
+			root = new QuadTreeNode(positionX, positionY,
+				this.size * 2.0f);
+			root.childs[childID] = this;
+			this.parent = root;
+
+			return root;
 		}
 
 		/**
@@ -209,15 +273,15 @@ public class TreeStorage implements Storage {
 		private int getChildIdAt(float x, float y) {
 			if(y > this.y) {
 				if(x > this.x) {
-					return CHILD_TR;
-				} else {
-					return CHILD_TL;
-				}
-			} else {
-				if(x > this.x) {
 					return CHILD_BR;
 				} else {
 					return CHILD_BL;
+				}
+			} else {
+				if(x > this.x) {
+					return CHILD_TR;
+				} else {
+					return CHILD_TL;
 				}
 			}
 		}
@@ -249,10 +313,10 @@ public class TreeStorage implements Storage {
 		public void get(ParticleSet set, float x, float y, float width, float height) {
 			boolean getTop, getBottom, getLeft, getRight;
 
-			getTop = (y + height > this.y);
-			getBottom = (y < this.y);
-			getLeft = (x + width > this.x);
-			getRight = (x < this.x);
+			getTop = (y < this.y);
+			getBottom = (y + height > this.y);
+			getLeft = (x < this.x);
+			getRight = (x + width > this.x);
 
 			if(getTop && getRight)
 				childs[CHILD_TR].get(set, x, y, width, height);
@@ -265,7 +329,7 @@ public class TreeStorage implements Storage {
 		}
 
 		@Override
-		int getDebugRectangle(Rectangle[] array, int index) {
+		public int getDebugRectangle(Rectangle[] array, int index) {
 			index = super.getDebugRectangle(array, index);
 
 			index = this.childs[0].getDebugRectangle(array, index);
@@ -278,7 +342,7 @@ public class TreeStorage implements Storage {
 	}
 
 	public TreeStorage() {
-		this.root = new QuadTreeNode();
+		this.root = null;
 		this.isEmpty = true;
 	}
 
@@ -287,7 +351,7 @@ public class TreeStorage implements Storage {
 		this.model = model;
 		this.model.setStorage(this);
 
-		this.root = new QuadTreeNode();
+		this.root = new QuadTreeNode(0.0f, 0.0f, 512.0f);
 		this.isEmpty = true;
 
 		this.updateParticles();
@@ -297,21 +361,36 @@ public class TreeStorage implements Storage {
 	                                   float w, float h) {
 		ParticleSet set = new ParticleSet();
 
+		if(this.root == null) return new Particle[0];
+
 		this.root.get(set, x, y, w, h);
 
 		return set.toArray();
 	}
 
 	public Particle getObjectAtPoint(float x, float y) {
+		if(this.root == null) return null;
 		return array[0];
 	}
 
+	public void expandRoot(Particle particle) {
+		QuadTreeNode oldRoot = (QuadTreeNode)this.root;
+		this.root = oldRoot.createNewRoot(particle.getX(),
+			particle.getY());
+	}
+
 	public void addParticle(Particle particle) {
+		if(this.root == null) return;
+
+		while(!this.root.isInside(particle)) {
+			this.expandRoot(particle);
+		}
+
 		this.root.insert(particle);
 	}
 
 	public void removeParticle(Particle particle) {
-		if(Float.isNaN(particle.getPrevX())) return;
+		if(this.root == null) return;
 		this.root.remove(particle);
 	}
 
@@ -319,13 +398,14 @@ public class TreeStorage implements Storage {
 		Particle[] array;
 		int i;
 
+		if(this.root == null) return;
 		array = model.getParticles();
 
 		for(i = 0; i < array.length; i++) {
 			if(!this.isEmpty) {
-				this.root.remove(array[i]);
+				this.removeParticle(array[i]);
 			}
-			this.root.insert(array[i]);
+			this.addParticle(array[i]);
 			array[i].setOld();
 		}
 		this.isEmpty = false;
