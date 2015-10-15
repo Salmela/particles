@@ -201,17 +201,16 @@ public class TreeStorage implements Storage {
 			this.size = size;
 			this.parent = null;
 
-			this.childs = new QuadTree[4];
-
-			this.childs[0] = new QuadTreeLeaf(this, 0);
-			this.childs[1] = new QuadTreeLeaf(this, 1);
-			this.childs[2] = new QuadTreeLeaf(this, 2);
-			this.childs[3] = new QuadTreeLeaf(this, 3);
+			initializeChilds();
 		}
 
 		public QuadTreeNode(QuadTreeNode parent, int childID) {
 			super(parent, childID);
 
+			initializeChilds();
+		}
+
+		private void initializeChilds() {
 			this.childs = new QuadTree[4];
 
 			this.childs[0] = new QuadTreeLeaf(this, 0);
