@@ -76,14 +76,14 @@ public class Stars implements Model {
 
 				} else if(r2 != 0.0) {
 					/* merge the particles */
-					vx = vx + another.getVelocityX() / 2.0f;
-					vy = vy + another.getVelocityY() / 2.0f;
+					//vx = vx + another.getVelocityX() / 2.0f;
+					//vy = vy + another.getVelocityY() / 2.0f;
 
-					x = particle.getX() + another.getX() / 2.0f;
-					y = particle.getY() + another.getY() / 2.0f;
-					another.setVelocity(vx, vy);
-					another.set(x, y);
-					particle.set(x, y);
+					//x = particle.getX() + another.getX() / 2.0f;
+					//y = particle.getY() + another.getY() / 2.0f;
+					//another.setVelocity(vx, vy);
+					//another.set(x, y);
+					//particle.set(x, y);
 				}
 			}
 
