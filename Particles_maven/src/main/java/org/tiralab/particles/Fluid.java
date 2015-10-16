@@ -93,6 +93,7 @@ public class Fluid implements Model {
 					//f = force_polynome(r);
 					/* with surface tension */
 					f = (r - 1);
+					f = f * f * f * 80;
 					//if(f < 0) f *= 100;
 
 					//System.out.println("spring "+i+"-"+j + ", force "+f+", radius "+r);
