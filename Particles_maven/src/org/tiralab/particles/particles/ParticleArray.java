@@ -1,12 +1,17 @@
-package org.tiralab.particles;
+package org.tiralab.particles.particles;
 
 import java.util.Iterator;
 
 /**
- * The dynamic array.
- *
+ * The dynamic array implementation.
+ *<p>
  * The data structure is dynamically growing array. It doesn't retain
  * insertion order, because of the implementation remove.
+ *<p>
+ * Note that this class cannot be generic class, because it's
+ * used as array type in
+ * {@link org.tiralab.particles.storages.ArrayStorage} class.
+ * Java doesn't support arrays of a generic class.
  */
 public class ParticleArray implements Iterable<Particle> {
 	private Particle[] array;

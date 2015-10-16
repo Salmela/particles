@@ -1,9 +1,9 @@
-package org.tiralab.particles;
+package org.tiralab.particles.particles;
 
 /**
- * This class is set for particle objects.
- *
- * It is implements as simple hash table.
+ * This class implements a set for particle objects.
+ *<p>
+ * It is implemented as simple hash table.
  */
 public class ParticleSet {
 	private ParticleArray[] array;

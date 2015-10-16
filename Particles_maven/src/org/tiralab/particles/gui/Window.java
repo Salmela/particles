@@ -1,4 +1,4 @@
-package org.tiralab.particles;
+package org.tiralab.particles.gui;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.MouseEvent;
@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.FontMetrics;
 import java.awt.AWTEvent;
+import org.tiralab.particles.particles.Particle;
 
 /**
  * Window class renders the whole gui.
@@ -121,6 +122,12 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		this.kineticMoveY = ky * .01f + this.kineticMoveY * .99f;
 	}
 
+        /**
+         * Compute the time difference between current and
+         * previous frame in milliseconds.
+         *
+         * @return The time difference in milliseconds.
+         */
 	public int computeTimeDelta() {
 		long currentTime, timeDelta;
 
@@ -399,7 +406,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 	}
 
 	/**
-	 * Gets the fps.
+	 * Gets the fps number.
 	 * @return The current fps.
 	 */
 	public float getFPS() {

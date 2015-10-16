@@ -1,8 +1,8 @@
-package org.tiralab.particles;
+package org.tiralab.particles.particles;
 
 /**
  * Store information about single particle.
- *
+ *<p>
  * TODO: The particle class should provide clean way to
  * get previous values.
  */

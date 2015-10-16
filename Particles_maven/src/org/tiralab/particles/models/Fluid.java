@@ -1,5 +1,7 @@
-package org.tiralab.particles;
+package org.tiralab.particles.models;
 
+import org.tiralab.particles.storages.Storage;
+import org.tiralab.particles.particles.Particle;
 import java.util.Random;
 
 /**

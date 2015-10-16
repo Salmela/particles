@@ -1,5 +1,9 @@
 package org.tiralab.particles;
 
+import org.tiralab.particles.models.Model;
+import org.tiralab.particles.storages.Storage;
+import org.tiralab.particles.particles.Particle;
+import org.tiralab.particles.gui.Rectangle;
 import org.junit.Assert;
 import org.junit.Test;
 

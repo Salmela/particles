@@ -1,4 +1,12 @@
-package org.tiralab.particles;
+package org.tiralab.particles.main;
+
+import org.tiralab.particles.storages.ArrayStorage;
+import org.tiralab.particles.storages.DirectStorage;
+import org.tiralab.particles.models.Fluid;
+import org.tiralab.particles.models.Model;
+import org.tiralab.particles.models.Stars;
+import org.tiralab.particles.storages.Storage;
+import org.tiralab.particles.storages.TreeStorage;
 
 /**
  * The commandline interface for the program.

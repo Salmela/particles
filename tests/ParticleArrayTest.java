@@ -1,5 +1,7 @@
 package org.tiralab.particles;
 
+import org.tiralab.particles.particles.Particle;
+import org.tiralab.particles.particles.ParticleArray;
 import java.util.Iterator;
 import org.junit.Assert;
 import org.junit.Test;

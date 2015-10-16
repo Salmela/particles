@@ -1,7 +1,13 @@
-package org.tiralab.particles;
+package org.tiralab.particles.storages;
+
+import org.tiralab.particles.models.Model;
+import org.tiralab.particles.particles.Particle;
+import org.tiralab.particles.particles.ParticleSet;
+import org.tiralab.particles.gui.Rectangle;
 
 /**
- * This acceleration structure stores the particles in quadtree.
+ * The spatial acceleration structure that stores
+ * the particles in Quadtrees.
  */
 public class TreeStorage implements Storage {
 	private Particle[] array;

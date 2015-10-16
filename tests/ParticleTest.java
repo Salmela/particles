@@ -1,5 +1,6 @@
 package org.tiralab.particles;
 
+import org.tiralab.particles.particles.Particle;
 import org.junit.Assert;
 import org.junit.Test;
 

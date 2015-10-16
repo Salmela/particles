@@ -1,7 +1,14 @@
-package org.tiralab.particles;
+package org.tiralab.particles.storages;
+
+import org.tiralab.particles.models.Model;
+import org.tiralab.particles.particles.Particle;
+import org.tiralab.particles.particles.ParticleSet;
+import org.tiralab.particles.particles.ParticleArray;
+import org.tiralab.particles.gui.Rectangle;
 
 /**
  * Array based particle storage.
+ *<p>
  * TODO: Add dynamic resizing.
  */
 public class ArrayStorage implements Storage {

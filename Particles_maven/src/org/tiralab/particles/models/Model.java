@@ -1,11 +1,16 @@
-package org.tiralab.particles;
+package org.tiralab.particles.models;
+
+import org.tiralab.particles.storages.Storage;
+import org.tiralab.particles.particles.Particle;
 
 /**
+ * The interface for model classes.
+ *<p>
  * The classes, which implement Model interface, store the actual
  * particles. These classes will only have simple array like structure
  * for storing the particle. The acceleration structures have more
  * specialised getters for fetching particles at some specific region.
- *
+ *<p>
  * The interface allows Models to emit event about particle
  * changes to its acceleration structure.
  */

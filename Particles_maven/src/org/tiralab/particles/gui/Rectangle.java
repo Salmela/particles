@@ -1,4 +1,4 @@
-package org.tiralab.particles;
+package org.tiralab.particles.gui;
 
 /**
  * A immutable rectangle class.

@@ -1,4 +1,16 @@
-package org.tiralab.particles;
+package org.tiralab.particles.main;
+
+import org.tiralab.particles.storages.ArrayStorage;
+import org.tiralab.particles.storages.DirectStorage;
+import org.tiralab.particles.models.Fluid;
+import org.tiralab.particles.models.Model;
+import org.tiralab.particles.models.Stars;
+import org.tiralab.particles.storages.Storage;
+import org.tiralab.particles.storages.TreeStorage;
+import org.tiralab.particles.gui.GuiListener;
+import org.tiralab.particles.particles.Particle;
+import org.tiralab.particles.gui.Rectangle;
+import org.tiralab.particles.gui.Window;
 
 /**
  * This class handles the program logic for the gui.

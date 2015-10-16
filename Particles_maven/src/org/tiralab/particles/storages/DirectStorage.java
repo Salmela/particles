@@ -1,4 +1,8 @@
-package org.tiralab.particles;
+package org.tiralab.particles.storages;
+
+import org.tiralab.particles.models.Model;
+import org.tiralab.particles.particles.Particle;
+import org.tiralab.particles.gui.Rectangle;
 
 /**
  * This is dummy acceleration structure that just gets the particles

@@ -1,4 +1,7 @@
-package org.tiralab.particles;
+package org.tiralab.particles.gui;
+
+import org.tiralab.particles.particles.Particle;
+import org.tiralab.particles.gui.Rectangle;
 
 /**
  * This interface allows the App class to hook up code
