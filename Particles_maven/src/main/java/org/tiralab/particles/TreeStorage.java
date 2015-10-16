@@ -143,10 +143,16 @@ public class TreeStorage implements Storage {
 		 */
 		public void insert(Particle particle) {
 			QuadTreeNode parent = this.getParent();
+
 			/* replace this leaf with a node if this is full */
 			if(this.particleCount >= 16) {
 				QuadTreeNode node;
 				int i;
+
+				if(this.size < .0001) {
+					System.out.println("QuadTree is too deep.");
+					System.exit(1);
+				}
 
 				node = new QuadTreeNode(parent, this.childID);
 				parent.replaceChild(this, node);
