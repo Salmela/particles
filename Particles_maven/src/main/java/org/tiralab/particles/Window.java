@@ -322,14 +322,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 		g.setColor(new Color(1f, 1f, 1f, 0.3f));
 		g.fillRect(0, 0, getWidth(), getHeight());
 		/* restore the color of the paint */
-		g.setColor(new Color(0f, 0f, 0f, 1f));
-
-		for(i = 0; i < particles.length; i++) {
-			Particle p = particles[i];
-			g.fillOval((int)(offsetX + p.getX() * this.zoom - 1),
-				(int)(offsetY + p.getY() * this.zoom - 1),
-				2, 2);
-		}
+		g.setColor(new Color(0.5f, 0.5f, 0.5f, 1f));
 
 		if(this.debugMode) {
 			Rectangle[] rectangles;
@@ -342,6 +335,14 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 					(int)(r.getWidth() * this.zoom),
 					(int)(r.getHeight() * this.zoom));
 			}
+		}
+		g.setColor(new Color(0f, 0f, 0f, 1f));
+
+		for(i = 0; i < particles.length; i++) {
+			Particle p = particles[i];
+			g.fillOval((int)(offsetX + p.getX() * this.zoom - 1),
+				(int)(offsetY + p.getY() * this.zoom - 1),
+				2, 2);
 		}
 
 		FontMetrics metrics = g.getFontMetrics();
