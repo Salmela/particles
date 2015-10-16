@@ -8,6 +8,7 @@ public class TreeStorage implements Storage {
 	private Model model;
 	private QuadTree root;
 	private boolean isEmpty;
+	private Rectangle[] debugRectangles;
 
 	/**
 	 * Implementation of quadtree.
@@ -362,6 +363,7 @@ public class TreeStorage implements Storage {
 	public TreeStorage() {
 		this.root = null;
 		this.isEmpty = true;
+		this.debugRectangles = new Rectangle[4096 * 32];
 	}
 
 	public void setModel(Model model)
@@ -434,13 +436,13 @@ public class TreeStorage implements Storage {
 	}
 
 	public Rectangle[] getDebugRectangle() {
-		Rectangle[] rects, array = new Rectangle[256];
+		Rectangle[] rects;
 		int size;
 
-		size = this.root.getDebugRectangle(array, 0);
+		size = this.root.getDebugRectangle(this.debugRectangles, 0);
 		rects = new Rectangle[size];
 
-		System.arraycopy(array, 0, rects, 0, size);
+		System.arraycopy(this.debugRectangles, 0, rects, 0, size);
 		return rects;
 	}
 }
