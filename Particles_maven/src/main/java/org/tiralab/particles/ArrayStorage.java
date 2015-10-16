@@ -16,7 +16,7 @@ public class ArrayStorage implements Storage {
 
 	private void reset() {
 		this.array = new ParticleArray[size][size];
-		this.x = this.y = 0;
+		this.x = this.y = -size * cellSize / 2;
 		this.isEmpty = true;
 	}
 
@@ -128,12 +128,12 @@ public class ArrayStorage implements Storage {
 		rectangles = new Rectangle[this.size * 2];
 
 		for(i = 0; i < this.size; i++) {
-			rectangles[i * 2] = new Rectangle(0,
-				i * this.cellSize,
+			rectangles[i * 2] = new Rectangle(this.x,
+				i * this.cellSize + this.y,
 				this.cellSize * this.size,
 				this.cellSize);
-			rectangles[i * 2 + 1] = new Rectangle(i * this.cellSize,
-				0, this.cellSize,
+			rectangles[i * 2 + 1] = new Rectangle(i * this.cellSize + this.x,
+				this.y, this.cellSize,
 				this.cellSize * this.size);
 		}
 
