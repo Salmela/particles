@@ -250,14 +250,15 @@ public class TreeStorage implements Storage {
 
 			if(particleY < this.y) {
 				positionY -= half;
+				childID += 2;
 			} else {
 				positionY += half;
-				childID += 2;
 			}
 
 			root = new QuadTreeNode(positionX, positionY,
 				this.size * 2.0f);
 			root.childs[childID] = this;
+			root.childID = childID;
 			this.parent = root;
 
 			return root;
