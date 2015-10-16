@@ -1,1 +1,5 @@
-org.tiralab.particles
+org.tiralab.particles.gui
+org.tiralab.particles.main
+org.tiralab.particles.models
+org.tiralab.particles.particles
+org.tiralab.particles.storages
