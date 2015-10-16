@@ -5,8 +5,8 @@ import java.util.Iterator;
 /**
  * The dynamic array.
  *
- * The data sturcture is dynamically growing array. It doesn't retain
- * insertation order, because of the implementation remove.
+ * The data structure is dynamically growing array. It doesn't retain
+ * insertion order, because of the implementation remove.
  */
 public class ParticleArray implements Iterable<Particle> {
 	private Particle[] array;
@@ -114,6 +114,7 @@ public class ParticleArray implements Iterable<Particle> {
 	 * The array contains particle.
 	 *
 	 * @param particle The particle
+	 * @return True if the array contains the particle.
 	 */
 	public boolean contains(Particle particle) {
 		return (this.getIndexOf(particle) >= 0);

@@ -40,7 +40,7 @@ public class ParticleSet {
 	 *
 	 * It isn't added if the set is already added.
 	 *
-	 * @param The particle
+	 * @param particle The particle
 	 */
 	public void add(Particle particle) {
 		ParticleArray bucket;

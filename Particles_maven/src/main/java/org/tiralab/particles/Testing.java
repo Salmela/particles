@@ -1,10 +1,18 @@
 package org.tiralab.particles;
 
+/**
+ * The commandline interface for the program.
+ */
 public class Testing {
 	private Model model;
 	private Storage storage;
 	private long frameEnd, count;
 
+	/**
+	 * Constructor for the command line tool.
+	 *
+	 * @param args The command line arguments.
+	 */
 	public Testing(String[] args) {
 		int i;
 		for(i = 0; i < args.length;) {
@@ -19,7 +27,7 @@ public class Testing {
 		this.storage.setModel(this.model);
 	}
 
-	public int commandExecute(String[] args, int i) {
+	private int commandExecute(String[] args, int i) {
 		String command = args[i];
 		if(command.charAt(0) != '-' ||
 		   command.charAt(1) != '-') {
@@ -48,7 +56,7 @@ public class Testing {
 		return 2;
 	}
 
-	public void printHelp() {
+	private void printHelp() {
 		System.out.println("USAGE: ./testing [OPTIONS]");
 		System.out.println("");
 		System.out.println("Arguments:");
@@ -69,7 +77,7 @@ public class Testing {
 		System.exit(1);
 	}
 
-	public void modelSwitch(String model) {
+	private void modelSwitch(String model) {
 		model = model.toLowerCase();
 		if(model.equals("stars")) {
 			this.model = new Stars();
@@ -78,7 +86,7 @@ public class Testing {
 		}
 	}
 
-	public void storageSwitch(String storage) {
+	private void storageSwitch(String storage) {
 		storage = storage.toLowerCase();
 		if(storage.equals("direct")) {
 			this.storage = new DirectStorage();
@@ -89,7 +97,7 @@ public class Testing {
 		}
 	}
 
-	public long runOnce() {
+	private long runOnce() {
 		long startTime, endTime;
 		int i;
 
@@ -104,7 +112,7 @@ public class Testing {
 		return (endTime - startTime);
 	}
 
-	public long runCompute() {
+	private long runCompute() {
 		long timeSum, time;
 		int i, tries;
 
@@ -119,6 +127,9 @@ public class Testing {
 		return time;
 	}
 
+	/**
+	 * Run the performance tests.
+	 */
 	public void run() {
 		while(true) {
 			long time = this.runCompute();
@@ -128,6 +139,10 @@ public class Testing {
 		}
 	}
 
+	/**
+	 * The main function for the command line tool.
+	 * @param args The command line arguments.
+	 */
 	public static void main(String[] args) {
 		Testing test;
 

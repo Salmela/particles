@@ -274,6 +274,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 
 	/**
 	 * Renders the content of the window.
+	 * @param graphics The graphics context.
 	 */
 	public void paint(Graphics graphics) {
 		Graphics g;
@@ -398,6 +399,7 @@ public class Window extends Frame implements MouseMotionListener, MouseListener,
 
 	/**
 	 * Gets the fps.
+	 * @return The current fps.
 	 */
 	public float getFPS() {
 		return this.fps;
